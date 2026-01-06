@@ -71,6 +71,34 @@ export default function ComparativoSlide() {
                   </motion.button>
                 ))}
               </div>
+
+              {/* IA Analysis */}
+              <motion.div
+                className="rounded-xl border border-[#00FF94]/20 bg-[#00FF94]/5 p-4 space-y-3"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <div>
+                  <p className="text-[11px] font-semibold text-[#00FF94] uppercase tracking-wider mb-1">Tom</p>
+                  <p className="text-xs text-white/70">Profissional mas acolhedor. Parece uma pessoa paciente que realmente quer ouvir.</p>
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-[#00FF94] uppercase tracking-wider mb-1">Linguagem</p>
+                  <ul className="text-xs text-white/70 space-y-0.5">
+                    <li>• Usa conectivos (&quot;E você já tentou...&quot;, &quot;Quero entender um pouco...&quot;)</li>
+                    <li>• Vocabulário cuidadoso (&quot;histórico&quot;, &quot;acompanhamento médico&quot;)</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-[#00FF94] uppercase tracking-wider mb-1">Fluxo</p>
+                  <p className="text-xs text-white/70">Cada mensagem constrói sobre a anterior. Existe uma lógica de conversa - pergunta, escuta, valida, pede permissão, explica.</p>
+                </div>
+                <div className="pt-2 border-t border-[#00FF94]/20">
+                  <p className="text-xs text-[#00FF94] font-medium">Sensação: Conversar com alguém que tem tempo pra você.</p>
+                </div>
+              </motion.div>
             </motion.div>
 
             {/* Human Column */}
@@ -109,6 +137,35 @@ export default function ComparativoSlide() {
                   </motion.button>
                 ))}
               </div>
+
+              {/* Human Analysis */}
+              <motion.div
+                className="rounded-xl border border-[#FF6B6B]/20 bg-[#FF6B6B]/5 p-4 space-y-3"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <div>
+                  <p className="text-[11px] font-semibold text-[#FF6B6B] uppercase tracking-wider mb-1">Tom</p>
+                  <p className="text-xs text-white/70">Animado demais, quase ansioso. Parece vendedor de loja querendo bater meta.</p>
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-[#FF6B6B] uppercase tracking-wider mb-1">Linguagem</p>
+                  <ul className="text-xs text-white/70 space-y-0.5">
+                    <li>• Gírias e informalidade (&quot;tá logo ali&quot;, &quot;Vai amar&quot;)</li>
+                    <li>• Emoji no meio de contexto de saúde</li>
+                    <li>• Excesso de entusiasmo (&quot;Ótimo!&quot;, &quot;💪&quot;)</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold text-[#FF6B6B] uppercase tracking-wider mb-1">Fluxo</p>
+                  <p className="text-xs text-white/70">Desconexo. Cliente fala &quot;ganhar massa&quot; e atendente já pula pra vender sem explorar nada.</p>
+                </div>
+                <div className="pt-2 border-t border-[#FF6B6B]/20">
+                  <p className="text-xs text-[#FF6B6B] font-medium">Sensação: Conversar com alguém que quer terminar logo pra atender o próximo.</p>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
