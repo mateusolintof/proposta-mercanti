@@ -39,7 +39,7 @@ const mainAgents: Plan[] = [
     name: "Agente Eventos",
     subtitle: "Confirmação de presença e dados para feiras e eventos",
     setup: "R$ 8.000,00",
-    monthly: "R$ 1.000,00",
+    monthly: "R$ 1.500,00",
     bullets: [
       "Múltiplas tentativas de contato (mensagem + ligação)",
       "Confirmação de presença no evento",
