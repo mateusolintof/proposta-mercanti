@@ -26,7 +26,7 @@ export default function CostReductionModal({
   const [messagesPerVendor, setMessagesPerVendor] = useState(700);
   const [automationPercent, setAutomationPercent] = useState(50);
 
-  const CAPACITY_MULTIPLIER = 1.8; // 80% more capacity with automation
+  const CAPACITY_MULTIPLIER = 0.5; // 25% more capacity with automation (conservative)
 
   const calculations = useMemo(() => {
     const automationRate = automationPercent / 100;

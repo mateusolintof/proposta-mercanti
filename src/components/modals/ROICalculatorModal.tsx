@@ -26,12 +26,12 @@ export default function ROICalculatorModal({
   const [currentSLARate, setCurrentSLARate] = useState(40);
 
   const VENDORS = 18;
-  const AI_SLA_BOOST = 2.2; // 220% improvement in SLA compliance
+  const AI_SLA_BOOST = 1.35; // 35% improvement in response rate
 
   const calculations = useMemo(() => {
-    const newSLARate = Math.min(currentSLARate * AI_SLA_BOOST, 95);
+    const newSLARate = Math.min(currentSLARate * AI_SLA_BOOST, 75);
 
-    // Messages that become qualified opportunities (with good SLA)
+    // Messages that become qualified opportunities (with good response time)
     const currentQualifiedLeads = Math.round(
       (messagesPerMonth * currentSLARate) / 100
     );
@@ -40,8 +40,8 @@ export default function ROICalculatorModal({
     );
     const additionalQualified = newQualifiedLeads - currentQualifiedLeads;
 
-    // Conversion from qualified leads (assumed 25% base)
-    const conversionRate = 0.25;
+    // Conversion from qualified leads (assumed 8% base - conservative)
+    const conversionRate = 0.08;
     const currentMonthlyOrders = Math.round(currentQualifiedLeads * conversionRate);
     const newMonthlyOrders = Math.round(newQualifiedLeads * conversionRate);
     const additionalOrders = newMonthlyOrders - currentMonthlyOrders;
@@ -137,7 +137,7 @@ export default function ROICalculatorModal({
 
           <div className="bg-white/5 border border-white/10 rounded-xl p-5">
             <label className="text-white/70 text-body block mb-4">
-              SLA atual (% leads atendidos &lt;3min)
+              Taxa de resposta rápida (%)
             </label>
             <Slider
               aria-label="SLA atual (%)"
@@ -160,32 +160,32 @@ export default function ROICalculatorModal({
           </div>
         </div>
 
-        {/* SLA Comparison */}
+        {/* Response Rate Comparison */}
         <div className="bg-white/5 border border-white/10 rounded-xl p-5">
           <h4 className="text-white font-semibold mb-4 flex items-center gap-2">
             <TrendingUp className="w-5 h-5 text-[#00FF94]" />
-            Projeção de Melhoria no SLA
+            Projeção de Melhoria na Taxa de Resposta
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="text-center">
-              <p className="text-white/50 text-sm mb-2">SLA Atual</p>
+              <p className="text-white/50 text-sm mb-2">Taxa Atual</p>
               <p className="text-3xl font-bold text-white/70">
                 {currentSLARate}%
               </p>
               <p className="text-white/40 text-sm mt-1">
-                {calculations.currentQualifiedLeads.toLocaleString()} leads qualificados/mês
+                {calculations.currentQualifiedLeads.toLocaleString()} leads atendidos/mês
               </p>
             </div>
             <div className="flex items-center justify-center">
               <ArrowRight className="w-8 h-8 text-[#00FF94]" />
             </div>
             <div className="text-center">
-              <p className="text-white/50 text-sm mb-2">SLA com Orquestração</p>
+              <p className="text-white/50 text-sm mb-2">Taxa com Orquestração</p>
               <p className="text-3xl font-bold text-[#00FF94]">
                 {calculations.newSLARate.toFixed(0)}%
               </p>
               <p className="text-[#00FF94] text-sm mt-1">
-                {calculations.newQualifiedLeads.toLocaleString()} leads qualificados/mês
+                {calculations.newQualifiedLeads.toLocaleString()} leads atendidos/mês
               </p>
             </div>
           </div>
@@ -194,7 +194,7 @@ export default function ROICalculatorModal({
               <span className="text-[#00FF94] font-bold text-xl">
                 +{calculations.additionalQualified.toLocaleString()}
               </span>{" "}
-              leads qualificados adicionais por mês
+              leads atendidos a tempo por mês
             </p>
           </div>
         </div>

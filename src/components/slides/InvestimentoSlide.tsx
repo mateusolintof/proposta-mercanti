@@ -24,7 +24,7 @@ const mainAgents: Plan[] = [
   {
     name: "Agente Atendimento",
     subtitle: "Orquestrador inteligente com qualificação 24/7",
-    setup: "R$ 20.000,00",
+    setup: "R$ 25.000,00",
     monthly: "R$ 5.000,00",
     bullets: [
       "Distribuição inteligente entre vendedores",
