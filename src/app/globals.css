@@ -265,3 +265,65 @@
     opacity: 0;
   }
 }
+
+/* Print styles for /proposta page */
+@media print {
+  /* Hide navigation */
+  .proposta-nav {
+    display: none !important;
+  }
+
+  /* Remove dark background for print */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Remove all animations */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Ensure cards print well */
+  .bg-white\/5,
+  .bg-\[\#02040A\] {
+    background: white !important;
+    border-color: #ddd !important;
+  }
+
+  /* Text colors for print */
+  .text-white {
+    color: black !important;
+  }
+
+  .text-white\/70,
+  .text-white\/60,
+  .text-white\/50,
+  .text-white\/40 {
+    color: #444 !important;
+  }
+
+  /* Accent colors stay visible */
+  .text-\[\#00E5FF\],
+  .text-\[\#00FF94\],
+  .text-\[\#FFD700\],
+  .text-\[\#FF6B6B\] {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Page breaks */
+  section {
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+
+  /* Expand all FAQ items for print */
+  [data-state="closed"] {
+    display: block !important;
+    height: auto !important;
+  }
+}
