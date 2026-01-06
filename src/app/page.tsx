@@ -23,6 +23,7 @@ const IntelligenceModal = dynamic(() => import("@/components/modals/Intelligence
 import IntroSlide from "@/components/slides/IntroSlide";
 import DiagnosticoSlide from "@/components/slides/DiagnosticoSlide";
 import SolucaoSlide from "@/components/slides/SolucaoSlide";
+import ComparativoSlide from "@/components/slides/ComparativoSlide";
 import FerramentasSlide from "@/components/slides/FerramentasSlide";
 import GanhosSlide from "@/components/slides/GanhosSlide";
 import InvestimentoSlide from "@/components/slides/InvestimentoSlide";
@@ -66,6 +67,7 @@ export default function Home() {
         label: "Solução",
         element: <SolucaoSlide onOpenModal={handleOpenModal} />,
       },
+      { id: "comparativo", label: "Comparativo", element: <ComparativoSlide /> },
       {
         id: "ferramentas",
         label: "Ferramentas",
