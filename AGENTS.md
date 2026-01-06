@@ -2,7 +2,9 @@
 
 ## Visao Geral
 
-Apresentacao horizontal interativa para Proposta Comercial da Convert.AI, personalizada para **Mercante Distribuidora** — focada em automacao de vendas e atendimento com integracoes ERP e API oficial da Meta.
+Projeto com duas apresentacoes:
+1. **Apresentacao Horizontal** (`/`) — Slides interativos com scroll horizontal e background 3D
+2. **Proposta Tecnica SPA** (`/proposta`) — Documento vertical focado em detalhes tecnicos
 
 **Cliente:** Mercante Distribuidora
 **Documento de negocio:** `public/docs/CONTEUDO.md`
@@ -14,8 +16,7 @@ Apresentacao horizontal interativa para Proposta Comercial da Convert.AI, person
 |------|-------|
 | Time de televendas | 18 vendedores |
 | Volume mensal | 12-15 mil mensagens |
-| Sistema atual | Fortics (~R$2.000/mes) |
-| Custo operacao | R$83.000/mes (18 vendedores + Fortics) |
+| Custo operacao | R$83.000/mes (18 vendedores) |
 | Eventos | Follow-up leva ~60 dias |
 | Cobranca | Risco de perda de numero WhatsApp |
 
@@ -45,43 +46,53 @@ npm run build:turbo     # producao (turbopack, rede requerida)
 npm start -p 3001       # Servir build final
 ```
 
+## Rotas
+
+| Rota | Descricao |
+|------|-----------|
+| `/` | Apresentacao horizontal interativa (9 slides) |
+| `/proposta` | Proposta tecnica SPA (scroll vertical) |
+
 ## Arquitetura de Componentes
 
-### Container Principal (`src/app/page.tsx`)
+### Apresentacao Principal (`/`)
 
 - Scroll horizontal com CSS snap
 - Gerenciamento de estado para modais (`useState<ModalKind>`)
 - Navegacao por teclado (←, →, Space, Home, End)
 - Conversao de mouse wheel para scroll horizontal
 - Progress bar animada com Framer Motion
+- Background 3D com particulas
 
-### Slides (8 total)
+### Slides (9 total)
 
 ```
 src/components/slides/
 ├── IntroSlide.tsx           # Hero principal
-├── DiagnosticoSlide.tsx     # Gargalos por area + custo operacional
+├── DiagnosticoSlide.tsx     # Gargalos (3 areas) + custo operacional
 ├── SolucaoSlide.tsx         # 4 solucoes orbitais (abre AgentModal)
+├── ComparativoSlide.tsx     # Comparativo IA vs Humano (prints reais)
 ├── FerramentasSlide.tsx     # CRM + Dashboard (abre modais de preview)
-├── GanhosSlide.tsx          # Projecao financeira (50% em 6 meses)
-├── InvestimentoSlide.tsx    # 3 pacotes modulares
-├── FAQSlide.tsx             # Perguntas frequentes
+├── GanhosSlide.tsx          # Projecao financeira
+├── InvestimentoSlide.tsx    # Pacotes + transparencia de custos
+├── FAQSlide.tsx             # Perguntas frequentes (5 perguntas)
 └── CronogramaSlide.tsx      # 4 fases de implementacao
 ```
 
-### SlideShell Props
+### Proposta SPA (`/proposta`)
 
-```tsx
-interface SlideShellProps {
-  eyebrow?: string;        // Label superior (ex: "Solucao")
-  eyebrowColor?: "default" | "success" | "warning" | "danger";
-  title: string;           // Titulo principal
-  subtitle?: string;       // Subtitulo
-  align?: "left" | "center";
-  size?: "default" | "compact";
-  background?: ReactNode;  // Background customizado
-  children?: ReactNode;    // Conteudo do slide
-}
+```
+src/components/proposta/
+├── PropostaPage.tsx         # Container principal
+├── SectionWrapper.tsx       # Wrapper de secao
+└── sections/
+    ├── SolucoesSection.tsx      # 4 solucoes detalhadas
+    ├── ComparativoSection.tsx   # Comparativo IA vs Humano
+    ├── ArquiteturaSection.tsx   # Stack tecnica + fluxo
+    ├── InvestimentoSection.tsx  # Precos + transparencia
+    ├── CustosSection.tsx        # ROI e breakdown
+    ├── FAQSection.tsx           # Accordion
+    └── ProcessoSection.tsx      # Timeline
 ```
 
 ### Sistema de Modais
@@ -102,37 +113,7 @@ export type ModalKind =
   | null;
 ```
 
-#### Modais Disponiveis
-
-| Modal | Arquivo | Aberto por | Descricao |
-|-------|---------|------------|-----------|
-| AgentModal | `AgentModal.tsx` | SolucaoSlide | Detalhes das 4 solucoes |
-| CRMPreviewModal | `CRMPreviewModal.tsx` | FerramentasSlide | Preview interativo do CRM |
-| DashboardPreviewModal | `DashboardPreviewModal.tsx` | FerramentasSlide | Preview do Dashboard |
-
-#### Sub-componentes de Modais
-
-```
-src/components/modals/
-├── ModalWrapper.tsx              # Base wrapper com overlay e animacoes
-├── agents/
-│   ├── RadialCapabilityDiagram.tsx  # Infografico em etapas por agente (4 agentes)
-│   └── AgentFlowDiagram.tsx         # Fluxograma interativo (XYFlow, 4 agentes)
-├── crm/
-│   ├── CRMDashboardView.tsx      # Visao geral do CRM
-│   ├── CRMContactsView.tsx       # Lista de contatos/leads
-│   ├── CRMPipelineView.tsx       # Pipeline de vendas (kanban)
-│   └── CRMInboxView.tsx          # Caixa de mensagens
-└── dashboard/
-    ├── DashVisaoGeralView.tsx    # KPIs principais
-    ├── DashGestaoIAView.tsx      # Metricas dos agentes
-    ├── DashClientesView.tsx      # Base de clientes
-    └── DashInsightsView.tsx      # Insights e recomendacoes
-```
-
-### Solucoes/Agentes IA
-
-#### 4 Solucoes (com modal detalhado)
+### Solucoes/Agentes IA (4 solucoes)
 
 | ID | Nome | Funcao | Cor |
 |----|------|--------|-----|
@@ -141,7 +122,7 @@ src/components/modals/
 | evento | Agente de Eventos | Confirmacao de presenca e coleta de dados | #FFD700 (Ouro) |
 | cobranca | Agente de Cobranca | Regua de cobranca com governanca WhatsApp | #FF6B6B (Vermelho) |
 
-#### Precos
+### Precos
 
 | Pacote | Setup | Mensal |
 |--------|-------|--------|
@@ -149,10 +130,34 @@ src/components/modals/
 | Agente de Cobranca | R$ 8.000,00 | R$ 1.000,00 |
 | Agente de Eventos | R$ 8.000,00 | R$ 1.500,00 |
 
-Cada solucao no AgentModal exibe:
-- Infografico em etapas (3 grupos)
-- Fluxograma interativo com XYFlow
-- Lista de beneficios (5 itens)
+### Transparencia de Custos
+
+**Incluso no valor mensal (R$ 6.000):**
+- Tokens de IA (Claude, OpenAI)
+- Banco de Dados (PostgreSQL + Redis)
+- Infraestrutura em nuvem
+- Manutencao + Suporte
+- API Meta (vendas e relacionamento)
+
+**Custo adicional do cliente:**
+- API Meta para marketing, promocoes e eventos/feiras (~R$ 0,30-0,50/conversa)
+
+## FAQ (5 perguntas)
+
+1. **O que esta incluso no valor mensal de R$ 6.000?** — Tokens, infra, suporte, API Meta para vendas
+2. **Como funciona o custo da API Oficial da Meta?** — Vendas incluso, marketing/promos a parte
+3. **Qual a stack tecnologica utilizada?** — Python, FastAPI, PostgreSQL, Redis, RAG, Claude API
+4. **Como garantem a seguranca e controle da IA?** — Guardrails, human-in-loop, handoffs, auditoria
+5. **Qual o prazo de implementacao?** — 4-8 semanas (4 fases)
+
+## Cronograma (4 fases)
+
+| Fase | Titulo | Descricao |
+|------|--------|-----------|
+| 1 | Imersao | Diagnostico da operacao, mapeamento de integracoes com ERP |
+| 2 | Desenvolvimento | Construcao dos agentes, integracoes e configuracao da plataforma |
+| 3 | Testes e Validacao | Validacao dos fluxos em ambiente controlado |
+| 4 | Go-Live | Lancamento para a equipe com acompanhamento continuo |
 
 ## Tema e Cores
 
@@ -189,7 +194,7 @@ const Scene = dynamic(() => import("@/components/3d/Scene"), { ssr: false });
 - Z-index 0 (abaixo do conteudo)
 ```
 
-## Navegacao
+## Navegacao (Apresentacao Principal)
 
 | Acao | Input |
 |------|-------|
@@ -199,97 +204,33 @@ const Scene = dynamic(() => import("@/components/3d/Scene"), { ssr: false });
 | Ultimo slide | `End` |
 | Slide especifico | Clique no dot |
 
-## Padroes de Codigo
+## Assets
 
-### Guia de padronizacao visual
-
-Consulte `STYLE_GUIDE.md` antes de alterar layout, tipografia, cores ou hierarquia de conteudo.
-
-### Tipografia minima
-
-- Texto legivel: minimo `text-[11px]`
-- Labels: `text-xs` (12px)
-- Body: `text-body`
-- Headings: `text-base` a `text-5xl`
-
-### Animacoes
-
-```tsx
-// Entrada de elementos
-initial={{ opacity: 0, y: 20 }}
-whileInView={{ opacity: 1, y: 0 }}
-viewport={{ once: true }}
-transition={{ delay: index * 0.1 }}
-
-// Hover em botoes
-whileHover={{ scale: 1.02 }}
-whileTap={{ scale: 0.98 }}
 ```
-
-### Modais com navegacao interna
-
-```tsx
-// Estado para abas
-const [activeView, setActiveView] = useState<ViewType>("dashboard");
-
-// Tabs com HeroUI ou custom
-<button
-  onClick={() => setActiveView("dashboard")}
-  className={activeView === "dashboard" ? "bg-white/10" : ""}
->
-  Dashboard
-</button>
+public/
+├── branding/
+│   ├── logo-principal-white.svg
+│   └── logo-badge-white.svg
+├── comparativo/
+│   ├── atendimentoIA1.png
+│   ├── atendimentoIA2.png
+│   ├── atendimentohumano1.png
+│   └── atendimentohumano2.png
+└── docs/
+    └── CONTEUDO.md
 ```
-
-## Projecao Financeira (GanhosSlide)
-
-### Premissas
-- 18 vendedores atuais
-- Custo/vendedor: R$4.500/mes (com 13o e ferias)
-- Custo Fortics atual: R$2.000/mes
-- Custo Solucao: R$6.000/mes (Omnichannel + Vendas)
-- **Meta: 50% da capacidade em 6 meses** (projecao agressiva)
-
-### Projecao 6 meses
-| Mes | % Capacidade | Vendedores Substituidos | Economia Mensal |
-|-----|--------------|------------------------|-----------------|
-| 1   | 12%          | 2                      | R$ 9.000        |
-| 2   | 20%          | 3.5                    | R$ 15.750       |
-| 3   | 30%          | 5                      | R$ 22.500       |
-| 4   | 38%          | 6.5                    | R$ 29.250       |
-| 5   | 44%          | 7.5                    | R$ 33.750       |
-| 6   | 50%          | 8+                     | R$ 36.000       |
-
-### Economia ao final do mes 6
-- Vendedores substituidos: 8 × R$4.500 = R$36.000/mes
-- Eliminacao Fortics: R$2.000/mes
-- Custo Solucao: -R$6.000/mes
-- **Economia liquida: R$32.000/mes**
-- **Payback: ~1.5 meses**
 
 ## Checklist do Projeto
 
-- [x] 8 slides criados e funcionando
+- [x] 9 slides na apresentacao principal
+- [x] Slide comparativo com prints reais (IA vs Humano)
 - [x] Background 3D integrado
 - [x] Navegacao horizontal com snap
 - [x] 4 solucoes com modais detalhados
-- [x] Infografico em etapas e fluxograma por agente
 - [x] CRM Preview com 4 abas
 - [x] Dashboard Preview com 4 abas
-- [x] Projecao financeira com tabela e ROI
-- [x] FAQSlide com perguntas frequentes
-- [x] Investimento com 3 pacotes modulares
-- [x] Animacoes Framer Motion
+- [x] Transparencia de custos (API Meta inclusa para vendas)
+- [x] FAQ atualizado (custos, stack, seguranca)
+- [x] Cronograma com 4 fases
+- [x] Proposta SPA em /proposta
 - [x] Responsivo mobile/desktop
-- [x] Paleta de cores aplicada
-
-## Conteudo de Negocio
-
-Ver `public/docs/CONTEUDO.md` para detalhes sobre:
-
-1. **Diagnostico:** Gargalos por area (Atendimento, Vendas, Eventos, Cobranca)
-2. **Solucoes:** 4 solucoes especializadas com modais detalhados
-3. **Ferramentas:** CRM + Dashboard executivo
-4. **Projecao:** 50% de capacidade em 6 meses, economia de R$32.000/mes
-5. **Investimento:** 3 pacotes modulares
-6. **Cronograma:** 4 fases de implementacao
