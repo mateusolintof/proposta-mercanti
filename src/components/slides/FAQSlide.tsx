@@ -27,13 +27,13 @@ const faqItems: FAQItem[] = [
     icon: <DollarSign className="w-5 h-5" />,
     question: "O que está incluso no valor mensal de R$ 6.000?",
     answer:
-      "O valor mensal inclui 100% dos custos operacionais: tokens de IA (Claude, OpenAI), banco de dados PostgreSQL e Redis, infraestrutura em nuvem, manutenção, atualizações de segurança, melhorias contínuas e suporte técnico dedicado. Também está incluso o custo da API Oficial da Meta para atendimento receptivo e vendas.",
+      "O valor mensal inclui 100% dos custos operacionais: tokens de IA (Claude, OpenAI), banco de dados PostgreSQL e Redis, infraestrutura em nuvem, manutenção, atualizações de segurança, melhorias contínuas e suporte técnico dedicado. Também está incluso o custo da API Oficial da Meta para vendas e mensagens de relacionamento com o cliente.",
   },
   {
     icon: <MessageSquare className="w-5 h-5" />,
     question: "Como funciona o custo da API Oficial da Meta?",
     answer:
-      "Para vendas e atendimento ao cliente (receptivo), o custo da API da Meta já está embutido no valor mensal. Porém, para campanhas de marketing, promoções e disparos em massa, o custo da API é repassado separadamente conforme consumo (~R$ 0,30 a 0,50 por conversa). A solução de cobrança também não inclui o custo da API — este é cobrado à parte.",
+      "Para vendas e mensagens de relacionamento com o cliente, o custo da API da Meta já está embutido no valor mensal. Porém, para campanhas de marketing, promoções e disparos em massa, o custo da API é repassado separadamente conforme consumo (~R$ 0,30 a 0,50 por conversa). A solução de cobrança também não inclui o custo da API — este é cobrado à parte.",
   },
   {
     icon: <Receipt className="w-5 h-5" />,
