@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bot, User, X, ZoomIn } from "lucide-react";
 import SlideShell from "@/components/ui/SlideShell";
@@ -8,16 +9,18 @@ import SlideShell from "@/components/ui/SlideShell";
 interface ImageData {
   src: string;
   alt: string;
+  width: number;
+  height: number;
 }
 
 const iaImages: ImageData[] = [
-  { src: "/comparativo/atendimentoIA1.png", alt: "Atendimento IA - Parte 1" },
-  { src: "/comparativo/atendimentoIA2.png", alt: "Atendimento IA - Parte 2" },
+  { src: "/comparativo/atendimentoIA1.png", alt: "Atendimento IA - Parte 1", width: 1940, height: 1318 },
+  { src: "/comparativo/atendimentoIA2.png", alt: "Atendimento IA - Parte 2", width: 1940, height: 1408 },
 ];
 
 const humanImages: ImageData[] = [
-  { src: "/comparativo/atendimentohumano1.png", alt: "Atendimento Humano - Parte 1" },
-  { src: "/comparativo/atendimentohumano2.png", alt: "Atendimento Humano - Parte 2" },
+  { src: "/comparativo/atendimentohumano1.png", alt: "Atendimento Humano - Parte 1", width: 1940, height: 1118 },
+  { src: "/comparativo/atendimentohumano2.png", alt: "Atendimento Humano - Parte 2", width: 1940, height: 1300 },
 ];
 
 export default function ComparativoSlide() {
@@ -56,10 +59,14 @@ export default function ComparativoSlide() {
                     transition={{ duration: 0.2 }}
                     onClick={() => setSelectedImage(image)}
                   >
-                    <img
+                    <Image
                       src={image.src}
                       alt={image.alt}
+                      width={400}
+                      height={300}
                       className="w-full h-auto"
+                      loading="lazy"
+                      quality={75}
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
                       <ZoomIn className="w-6 h-6 md:w-8 md:h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -90,10 +97,14 @@ export default function ComparativoSlide() {
                     transition={{ duration: 0.2 }}
                     onClick={() => setSelectedImage(image)}
                   >
-                    <img
+                    <Image
                       src={image.src}
                       alt={image.alt}
+                      width={400}
+                      height={300}
                       className="w-full h-auto"
+                      loading="lazy"
+                      quality={75}
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
                       <ZoomIn className="w-6 h-6 md:w-8 md:h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -127,15 +138,23 @@ export default function ComparativoSlide() {
               <X className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </motion.button>
 
-            <motion.img
-              src={selectedImage.src}
-              alt={selectedImage.alt}
-              className="max-w-[95vw] max-h-[90vh] object-contain rounded-lg shadow-2xl"
+            <motion.div
+              className="relative max-w-[95vw] max-h-[90vh]"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
               onClick={(e) => e.stopPropagation()}
-            />
+            >
+              <Image
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                width={selectedImage.width}
+                height={selectedImage.height}
+                className="max-w-[95vw] max-h-[90vh] object-contain rounded-lg shadow-2xl"
+                quality={90}
+                priority
+              />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

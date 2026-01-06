@@ -1,8 +1,7 @@
 "use client";
 
 import { Canvas, useThree } from "@react-three/fiber";
-import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
-import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
+import { Suspense, useCallback, useEffect, useMemo } from "react";
 import ElegantNetwork from "./ElegantNetwork";
 import { useMediaQuery } from "@/lib/useMediaQuery";
 
@@ -41,15 +40,13 @@ function WebGLContextGuard({
 
 export default function Scene() {
   const isDesktop = useMediaQuery("(min-width: 768px)");
-  const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
-  const [postProcessingEnabled, setPostProcessingEnabled] = useState(true);
 
   const handleContextLost = useCallback(() => {
-    setPostProcessingEnabled(false);
+    // Context lost - could add fallback here if needed
   }, []);
 
   const handleContextRestored = useCallback(() => {
-    setPostProcessingEnabled(true);
+    // Context restored
   }, []);
 
   const quality = useMemo(() => {
@@ -89,18 +86,6 @@ export default function Scene() {
           speed={quality.speed}
         />
         <ambientLight intensity={0.3} />
-
-        {/* Post-processing effects */}
-        {postProcessingEnabled && isDesktop && !prefersReducedMotion ? (
-          <EffectComposer>
-            <Bloom
-              intensity={0.3}
-              luminanceThreshold={0.8}
-              luminanceSmoothing={0.9}
-            />
-            <Vignette offset={0.3} darkness={0.7} />
-          </EffectComposer>
-        ) : null}
       </Suspense>
     </Canvas>
   );
