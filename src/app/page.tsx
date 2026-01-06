@@ -22,7 +22,6 @@ const IntelligenceModal = dynamic(() => import("@/components/modals/Intelligence
 // Slides
 import IntroSlide from "@/components/slides/IntroSlide";
 import DiagnosticoSlide from "@/components/slides/DiagnosticoSlide";
-import ObjetivoProjetoSlide from "@/components/slides/ObjetivoProjetoSlide";
 import SolucaoSlide from "@/components/slides/SolucaoSlide";
 import FerramentasSlide from "@/components/slides/FerramentasSlide";
 import GanhosSlide from "@/components/slides/GanhosSlide";
@@ -62,7 +61,6 @@ export default function Home() {
     () => [
       { id: "intro", label: "Início", element: <IntroSlide onEnter={() => scrollToIndex(1)} /> },
       { id: "diagnostico", label: "Diagnóstico", element: <DiagnosticoSlide /> },
-      { id: "objetivo", label: "Objetivo", element: <ObjetivoProjetoSlide /> },
       {
         id: "solucao",
         label: "Solução",

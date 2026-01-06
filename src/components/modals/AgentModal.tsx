@@ -3,7 +3,8 @@
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import {
-  Headphones,
+  MessageSquareMore,
+  ShoppingCart,
   Calendar,
   Receipt,
   CheckCircle,
@@ -42,49 +43,64 @@ const agentData: Record<
     benefits: string[];
   }
 > = {
-  atendimento: {
-    name: "Agente Atendimento",
-    fullName: "Orquestrador Inteligente com Qualificação 24/7",
+  omnichannel: {
+    name: "Solução Omnichannel",
+    fullName: "API Oficial Meta + Inbox Unificado",
     description:
-      "Distribui leads entre os 18 vendedores com base em disponibilidade e carga. Qualifica automaticamente, coleta dados essenciais e faz handoff com contexto completo — inclusive fora do horário comercial.",
-    icon: <Headphones className="w-6 h-6" />,
+      "Plataforma completa de atendimento com API oficial da Meta para WhatsApp, roteamento inteligente de números e inbox unificado para toda a equipe de vendas. Histórico centralizado e métricas por vendedor.",
+    icon: <MessageSquareMore className="w-6 h-6" />,
     color: "#00E5FF",
     benefits: [
-      "Distribuição inteligente - Lead vai para o vendedor certo, na hora certa",
-      "Qualificação automática - Coleta nome, empresa, interesse antes do handoff",
-      "Atendimento 24/7 - Responde fora do horário comercial e finais de semana",
-      "Balanceamento de carga - Distribuição equilibrada entre os 18 vendedores",
-      "Handoff com contexto - Vendedor recebe histórico completo da conversa",
+      "API Oficial Meta - Compliance total, sem risco de bloqueio de número",
+      "Inbox Unificado - Todos os vendedores em uma única interface",
+      "Roteamento de Números - Mesma lógica atual com balanceamento inteligente",
+      "Histórico Centralizado - Busca, auditoria e continuidade de conversas",
+      "Métricas por Vendedor - Tempo de resposta, volume e conversão",
+    ],
+  },
+  vendas: {
+    name: "Agente de Vendas",
+    fullName: "Automação de Vendas com Integração ERP",
+    description:
+      "Agente inteligente que identifica clientes (cadastrados ou novos), consulta produtos, preços e estoque no ERP via RAG, e cria ordens de venda automaticamente. Human-in-loop para casos especiais.",
+    icon: <ShoppingCart className="w-6 h-6" />,
+    color: "#00FF94",
+    benefits: [
+      "Identificação de Cliente - Busca por CPF/CNPJ, histórico de compras",
+      "Consulta ao ERP - Produtos, preços e disponibilidade em tempo real",
+      "RAG de Produtos - Conhece categorias, especificações e condições",
+      "Criação de Pedidos - Gera ordem de venda diretamente no ERP",
+      "Cross-sell Inteligente - Sugestões baseadas no histórico do cliente",
     ],
   },
   evento: {
-    name: "Agente Evento",
-    fullName: "Follow-up Automatizado para Feiras e Eventos",
+    name: "Agente de Eventos",
+    fullName: "Confirmação de Presença e Coleta de Dados",
     description:
-      "Especializado em converter leads capturados em eventos presenciais. Faz follow-up em 24h (não 30 dias), atualiza dados cadastrais e mantém cadência automatizada até o agendamento.",
+      "Especializado em contatar participantes de feiras e eventos para confirmar presença, coletar dados cadastrais e validar informações. Múltiplas tentativas (mensagem + ligação) até conseguir contato.",
     icon: <Calendar className="w-6 h-6" />,
     color: "#FFD700",
     benefits: [
-      "Follow-up em 24h - Contato imediato pós-evento, não semanas depois",
-      "Cadência automatizada - Sequência de 3-5 toques otimizada",
-      "Atualização de dados - Coleta informações que faltaram no evento",
-      "Agendamento inteligente - Sugere horários e agenda visita/call",
-      "Métricas por evento - ROI e conversão de cada feira/ação",
+      "Confirmação de Presença - Contato proativo pré-evento",
+      "Múltiplas Tentativas - WhatsApp + ligação até conseguir contato",
+      "Coleta de Dados - Valida e atualiza informações cadastrais",
+      "Cadência Automatizada - Sequência de 3-5 toques otimizada",
+      "Métricas por Evento - Taxa de confirmação e ROI mensurável",
     ],
   },
   cobranca: {
-    name: "Agente Cobrança",
+    name: "Agente de Cobrança",
     fullName: "Régua de Cobrança com Governança WhatsApp",
     description:
-      "Automatiza cobrança de inadimplentes com régua inteligente, múltiplos canais e governança para evitar perda de número. Human-in-loop para negociações sensíveis.",
+      "Automatiza cobrança de inadimplentes com régua inteligente (pré e pós-vencimento), múltiplos canais e governança para evitar perda de número. Human-in-loop para negociações sensíveis.",
     icon: <Receipt className="w-6 h-6" />,
     color: "#FF6B6B",
     benefits: [
-      "Régua inteligente - Sequência de lembretes pré-vencimento e pós-vencimento",
+      "Régua Inteligente - Sequência pré-vencimento (D-3) e pós-vencimento (D+1, D+7)",
       "Governança WhatsApp - Limites de envio, opt-out e qualidade controlados",
-      "Múltiplos canais - WhatsApp, SMS, e-mail conforme preferência do cliente",
+      "Múltiplos Canais - WhatsApp, SMS, e-mail conforme preferência do cliente",
       "Human-in-loop - Escala para humano em negociações ou valores altos",
-      "Dashboard de inadimplência - Visão de aging, recovery e motivos",
+      "Dashboard de Inadimplência - Visão de aging, recovery e motivos",
     ],
   },
 };
@@ -142,9 +158,9 @@ export default function AgentModal({ agent, isOpen, onClose }: AgentModalProps) 
             {/* CTA */}
             <div className="text-center pt-4 border-t border-white/10">
               <p className="text-white/50 text-sm">
-                Este agente está incluído no{" "}
+                Esta solução faz parte do{" "}
                 <span className="text-[#00FF94] font-semibold">
-                  Pacote Completo
+                  Pacote Modular
                 </span>
               </p>
             </div>

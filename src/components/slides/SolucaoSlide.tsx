@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import {
-  Headphones,
+  MessageSquareMore,
+  ShoppingCart,
   Calendar,
   Receipt,
   BrainCircuit,
@@ -10,34 +11,40 @@ import {
 import SlideShell from "@/components/ui/SlideShell";
 import type { ModalKind, AgentType } from "@/types/modal";
 
-const ORBIT_RADIUS = "clamp(120px, 18vw, 200px)";
-const AGENT_ANGLES = [0, 120, 240]; // 3 agentes em 360°
+const ORBIT_RADIUS = "clamp(130px, 20vw, 210px)";
+const AGENT_ANGLES = [0, 90, 180, 270]; // 4 agentes em 360°
 
 const agents: { id: AgentType; name: string; icon: React.ReactNode; color: string }[] = [
   {
-    id: "atendimento",
-    name: "Agente Atendimento",
-    icon: <Headphones className="w-5 h-5" />,
+    id: "omnichannel",
+    name: "Solução Omnichannel",
+    icon: <MessageSquareMore className="w-5 h-5" />,
     color: "#00E5FF",
   },
   {
+    id: "vendas",
+    name: "Agente de Vendas",
+    icon: <ShoppingCart className="w-5 h-5" />,
+    color: "#00FF94",
+  },
+  {
     id: "evento",
-    name: "Agente Evento",
+    name: "Agente de Eventos",
     icon: <Calendar className="w-5 h-5" />,
     color: "#FFD700",
   },
   {
     id: "cobranca",
-    name: "Agente Cobrança",
+    name: "Agente de Cobrança",
     icon: <Receipt className="w-5 h-5" />,
     color: "#FF6B6B",
   },
 ];
 
 const features = [
-  { title: "Distribuição Inteligente", desc: "Distribuição equilibrada entre 18 vendedores com qualificação automática e rotação dinâmica" },
-  { title: "Governança WhatsApp", desc: "Limites de envio, opt-out respeitado e múltiplos canais para evitar perda de número" },
-  { title: "Integrações", desc: "Fortix, ERP e base de conhecimento integrados com handoff inteligente para humanos" },
+  { title: "API Oficial Meta", desc: "WhatsApp Business API com inbox unificado, roteamento de números e histórico centralizado" },
+  { title: "Integração ERP", desc: "Agente de Vendas com acesso a preços, estoque e criação de ordens de venda automatizada" },
+  { title: "Governança WhatsApp", desc: "Controle de limites, opt-out respeitado e múltiplos canais para proteger seu número" },
 ];
 
 interface SolucaoSlideProps {
@@ -50,7 +57,7 @@ export default function SolucaoSlide({ onOpenModal }: SolucaoSlideProps) {
       eyebrow="Solução"
       eyebrowColor="success"
       title="Arquitetura da Solução"
-      subtitle="3 Agentes Especializados + Orquestração Inteligente"
+      subtitle="4 Soluções Integradas para Transformar sua Operação"
       align="center"
       size="compact"
       background={

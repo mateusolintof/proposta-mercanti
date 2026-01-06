@@ -1,5 +1,5 @@
 # Proposta Comercial
-## Orquestrador de Atendimento Comercial — Mercante Distribuidora
+## Soluções de Automação para Mercante Distribuidora
 
 **Cliente:** Mercante Distribuidora
 **Preparado por:** Convert A.I — Arquitetura de Agentes de IA
@@ -11,123 +11,106 @@
 ### Cenário da Operação
 
 - **18 vendedores** em televendas.
-- **12-15 mil mensagens/mês** de volume.
-- Sistema atual: **Fortix** (cliente escolhe vendedor em lista, sem rotação automática).
-- **Eventos/feiras:** ~1000 leads por evento, follow-up demora ~30 dias.
-- **Cobrança:** ~1000 mensagens/dia com risco de perda de número WhatsApp.
+- **Custo mensal:** R$81.000 (18 × R$4.500 com 13º e férias) + R$2.000 (Fortics) = **R$83.000/mês**.
+- **Sistema atual:** Fortics (~R$2.000/mês).
+- **Eventos:** Follow-up leva ~60 dias.
+- **Cobrança:** Risco de perda de número WhatsApp.
 
-### Gargalos Identificados
+### Gargalos Identificados por Área
 
-| # | Gargalo | Impacto no negócio |
-|---|--------|--------------------|
-| 1 | Sem fila inteligente | Lead fica preso se vendedor escolhido não responder |
-| 2 | Distribuição desigual | Vendedores sobrecarregados x ociosos |
-| 3 | Falta de controle operacional | Sem visibilidade de funil, tempo de resposta indefinido |
-| 4 | Follow-up de eventos tardio | ~1000 leads por evento desperdiçados (30 dias para contato) |
-| 5 | Cobrança sem governança | Risco de perda de número WhatsApp, sem controle de limites |
-| 6 | Falta de visibilidade | Sem métricas de funil ou distribuição por vendedor |
+| Área | Problema | Impacto |
+|------|----------|---------|
+| **Atendimento** | Sem inbox unificado, vendedores alternam entre sistemas | Histórico fragmentado, perda de contexto |
+| **Vendas** | Processo manual, sem acesso rápido a preços/estoque | Erros em pedidos, sem cross-sell |
+| **Eventos** | Follow-up leva ~60 dias | Leads quentes esfriam, ROI difícil de medir |
+| **Cobrança** | Processo manual, sem governança | Risco de perda do número WhatsApp |
 
-### O que está quebrando o processo (e fazendo receita escapar)
+### Custo de Não Agir
 
-- **Lead trava por falta de fallback** → Quando o cliente escolhe um vendedor e ele não responde, a conversa fica "congelada".
-- **Distribuição desigual = gargalo + ociosidade** → Alguns vendedores ficam sobrecarregados enquanto outros ficam subutilizados.
-- **Sem regras, não existe previsibilidade** → Sem prioridade, sem fila e sem cadência, a performance vira "sorte do atendimento".
-
-### Custo de não agir
-
-- Leads ficam presos e esfriam sem resposta.
-- Follow-ups demoram semanas (eventos e recompra viram lista fria).
-- Cobrança em alto volume desgasta o canal e reduz capacidade de contato.
-
-> Nota: Dados e exemplos usados nesta proposta são ilustrativos. Metas e cenários serão ajustados após imersão e leitura dos dados reais.
+- Vendedores gastam tempo em tarefas repetitivas.
+- Leads de eventos viram lista fria (~60 dias).
+- Cobrança em alto volume desgasta o canal.
+- Sem escalabilidade: crescer = contratar.
 
 ---
 
-## 2) Solução Proposta — Orquestrador + 5 Agentes Especializados
+## 2) Soluções Propostas — 4 Soluções Especializadas
 
 ### Proposta de Valor
 
-> Transformar o atendimento de televendas da Mercante em operação orquestrada: fila inteligente com controle operacional, agentes especializados por jornada e governança para proteger a operação de cobrança.
+> Transformar a operação da Mercante com automação inteligente: API oficial da Meta com inbox unificado, agente de vendas integrado ao ERP, automação de eventos e cobrança com governança.
 
 ### Arquitetura (alto nível)
 
-- **Orquestrador de fila** com rotação automática entre 18 vendedores.
-- **5 agentes especializados** por jornada.
-- **Handoffs inteligentes** com contexto preservado.
-- **CRM integrado** (inbox + pipeline + histórico).
-- **Dashboard executivo** com distribuição e funil.
+- **Solução Omnichannel** com API oficial Meta e inbox unificado.
+- **Agente de Vendas** com integração ERP e RAG.
+- **Agente de Eventos** para confirmação de presença.
+- **Agente de Cobrança** com régua inteligente e governança.
+- **Dashboard executivo** com métricas por vendedor.
 - **Governança WhatsApp** (limites, qualidade, opt-out).
-- **Integração Fortix** (via API/webhooks).
-- **Guardrails**: LGPD, auditoria, human-in-loop.
+- **Guardrails**: Human-in-loop para casos especiais.
 
 ---
 
-## 3) Agentes Especializados
+## 3) Soluções Especializadas
 
-### Agentes Principais
-
-#### 3.1) Agente Atendimento (Core)
+### 3.1) Solução Omnichannel
 
 **O que faz**
-- Orquestrador de atendimento com qualificação 24/7.
-- Distribui leads entre os 18 vendedores com balanceamento de carga.
-- Rotação automática se vendedor não responder.
+- API Oficial da Meta para WhatsApp.
+- Roteamento de números (mesma lógica atual com balanceamento).
+- Inbox Unificado para todos os vendedores.
+- Histórico centralizado de conversas.
 
 **Benefícios**
-- Lead nunca fica preso — fallback automático.
-- Qualificação e handoff com contexto preservado.
-- Distribuição equilibrada (fim do vendedor sobrecarregado).
-- Atendimento fora do horário comercial.
+- API Oficial Meta — Compliance total, sem risco de bloqueio.
+- Inbox Unificado — Todos os vendedores em uma única interface.
+- Roteamento de Números — Mesma lógica atual com balanceamento inteligente.
+- Histórico Centralizado — Busca, auditoria e continuidade de conversas.
+- Métricas por Vendedor — Tempo de resposta, volume e conversão.
 
-#### 3.2) Agente Eventos
+### 3.2) Agente de Vendas
 
 **O que faz**
-- Confirmação de presença e dados para feiras e eventos presenciais.
-- Múltiplas tentativas de contato (mensagem + ligação).
+- Identifica cliente (CPF/CNPJ) — cadastrado vs novo.
+- Consulta ERP via RAG (produtos, preços, estoque).
+- Cria Ordem de Venda diretamente no ERP.
+- Human-in-loop para casos especiais.
 
 **Benefícios**
-- Confirmação de presença no evento.
-- Validação e atualização de dados cadastrais.
-- Múltiplas tentativas até conseguir contato.
-- Métricas de confirmação e ROI por evento.
+- Identificação de Cliente — Busca por CPF/CNPJ, histórico de compras.
+- Consulta ao ERP — Produtos, preços e disponibilidade em tempo real.
+- RAG de Produtos — Conhece categorias, especificações e condições.
+- Criação de Pedidos — Gera ordem de venda diretamente no ERP.
+- Cross-sell Inteligente — Sugestões baseadas no histórico do cliente.
 
-### Agentes Complementares
-
-#### 3.3) Agente Cobrança
+### 3.3) Agente de Eventos
 
 **O que faz**
-- Régua de cobrança com governança WhatsApp.
-- Controle de limites de envio e qualidade de número.
+- Contato para confirmação de presença em feiras e eventos.
+- Coleta de dados dos participantes.
+- Múltiplas tentativas (mensagem + ligação).
 
 **Benefícios**
-- Múltiplos canais (WhatsApp, SMS, e-mail) com fallback.
-- Limites de envio respeitados (Meta guidelines).
-- Human-in-loop para negociações de valor.
-- Proteção contra perda de número.
+- Confirmação de Presença — Contato proativo pré-evento.
+- Múltiplas Tentativas — WhatsApp + ligação até conseguir contato.
+- Coleta de Dados — Valida e atualiza informações cadastrais.
+- Cadência Automatizada — Sequência de 3-5 toques otimizada.
+- Métricas por Evento — Taxa de confirmação e ROI mensurável.
 
-#### 3.4) Agente Follow-Up e Recompra
+### 3.4) Agente de Cobrança
 
 **O que faz**
-- Reativação de clientes inativos.
-- Cadência automatizada de recompra.
+- Régua de cobrança inteligente (pré e pós-vencimento).
+- Governança WhatsApp (limites e qualidade).
+- Human-in-loop para negociações.
 
 **Benefícios**
-- Identificação de clientes inativos.
-- Ofertas personalizadas por histórico.
-- Métricas de reativação e LTV.
-- Alertas de risco de churn.
-
-#### 3.5) Agente Copiloto + POP
-
-**O que faz**
-- Assistente de bolso para vendedores.
-- Sistema de disparo de promoções (POP).
-
-**Benefícios**
-- Assistente para dúvidas de produto.
-- Consulta de estoque e preços.
-- Disparo de promoções (POP).
-- Sugestões de venda cruzada.
+- Régua Inteligente — Sequência pré-vencimento (D-3) e pós-vencimento (D+1, D+7).
+- Governança WhatsApp — Limites de envio, opt-out e qualidade controlados.
+- Múltiplos Canais — WhatsApp, SMS, e-mail conforme preferência do cliente.
+- Human-in-loop — Escala para humano em negociações ou valores altos.
+- Dashboard de Inadimplência — Visão de aging, recovery e motivos.
 
 ---
 
@@ -137,16 +120,14 @@
 
 - Inbox unificado (multicanal).
 - Pipeline de vendas (etapas, responsáveis).
-- Histórico de conversas e auditoria de handoffs.
-- Integração com Fortix (sincronização de leads/status).
+- Histórico de conversas e auditoria.
 
 ### Dashboard Executivo (gestão)
 
-- **Taxa de resposta** por vendedor e por período.
-- **Distribuição** de carga entre os 18 vendedores.
-- **Taxa de abandono** por falta de resposta.
-- **Recovery de eventos** (% de leads de feiras que entraram no funil).
-- **Governança WhatsApp** (qualidade do número, limites).
+- **Métricas por vendedor** — tempo de resposta, volume, conversão.
+- **Distribuição** de carga entre vendedores.
+- **KPIs de eventos** — taxa de confirmação, ROI por evento.
+- **Governança WhatsApp** — qualidade do número, limites.
 
 ### Governança WhatsApp
 
@@ -158,14 +139,47 @@
 
 ---
 
-## 5) KPIs Sugeridos (ajustáveis após imersão)
+## 5) Projeção de Resultados (6 meses)
 
-- **Taxa de resposta rápida** (% de leads atendidos a tempo).
-- **Distribuição por vendedor** (balanceamento de carga).
-- **Taxa de abandono** (leads que esfriaram por falta de resposta).
-- **Recovery de eventos** (% de leads de feiras convertidos).
-- **Handoff rate** (orquestrador → vendedor) e contexto.
-- **Governança WhatsApp** (qualidade do número, limites de envio).
+### Premissas
+- 18 vendedores atuais × R$4.500/mês = R$81.000/mês
+- Custo Fortics atual: R$2.000/mês
+- Custo Solução: R$6.000/mês (Omnichannel + Vendas)
+- **Meta: 50% da capacidade em 6 meses** (projeção agressiva)
+
+### Projeção Mensal
+
+| Mês | Leads/Agente | % Capacidade | Vendedores Substituídos | Economia Mensal |
+|-----|--------------|--------------|------------------------|-----------------|
+| 1   | 1.000        | 12%          | 2                      | R$ 9.000        |
+| 2   | 1.800        | 20%          | 3.5                    | R$ 15.750       |
+| 3   | 2.700        | 30%          | 5                      | R$ 22.500       |
+| 4   | 3.400        | 38%          | 6.5                    | R$ 29.250       |
+| 5   | 4.000        | 44%          | 7.5                    | R$ 33.750       |
+| 6   | 4.500        | 50%          | 8+                     | R$ 36.000       |
+
+### Economia ao Final do Mês 6
+
+| Item | Valor |
+|------|-------|
+| Vendedores substituídos (8 × R$4.500) | R$ 36.000/mês |
+| Eliminação Fortics | R$ 2.000/mês |
+| Custo Solução (Omnichannel + Vendas) | -R$ 6.000/mês |
+| **Economia líquida** | **R$ 32.000/mês** |
+
+### ROI
+
+- **Investimento inicial (Setup):** R$ 35.000
+- **Economia acumulada (6 meses):** ~R$ 145.000
+- **Payback:** ~1.5 meses
+
+### Outros Ganhos
+
+1. **Eficiência de Atendimento** — Respostas ágeis, informações consistentes.
+2. **Atendimento 24/7** — Não perde leads noturnos/finais de semana.
+3. **Aumento de Conversão** — Follow-up automatizado, cross-sell inteligente.
+4. **Escalabilidade Total** — Cresce sem contratar.
+5. **Automação de Eventos** — Follow-up em dias, não meses.
 
 ---
 
@@ -173,48 +187,46 @@
 
 | Fase | Objetivo | Entregas principais |
 |------|----------|---------------------|
-| 1 — Imersão | Diagnóstico de fila + dados | Desenho de roteamento, integração Fortix, governança |
-| 2 — Piloto | Core (Atendimento) operando | Validação com 1-2 vendedores, ajustes de fluxo |
-| 3 — Rollout | Expansão + integrações | Toda equipe, Fortix, eventos, cobrança |
-| 4 — Otimização | Análise + frentes adicionais | Recompra, copiloto, métricas, melhoria contínua |
+| 1 — Imersão | Diagnóstico detalhado | Mapeamento de processos, integração ERP |
+| 2 — Piloto | Omnichannel + Vendas operando | Validação com vendedores piloto |
+| 3 — Rollout | Expansão + agentes | Toda equipe, Eventos, Cobrança |
+| 4 — Otimização | Análise + melhoria contínua | Métricas, ajustes, expansão |
 
 ---
 
 ## 7) Investimento
 
-### Agentes Principais
+### Pacote Principal
+
+| Solução | Setup | Mensal | Contrato |
+|---------|-------|--------|----------|
+| **Omnichannel + Agente de Vendas** | R$ 35.000,00 | R$ 6.000,00 | 12 meses |
+
+**Inclui:**
+- API Oficial Meta para WhatsApp
+- Inbox Unificado para vendedores
+- Agente de Vendas com RAG
+- Integração ERP (consulta + criação de pedidos)
+- Guardrails e Human-in-loop
+- Dashboard executivo
+
+### Pacotes Complementares
 
 | Agente | Setup | Mensal |
 |--------|-------|--------|
-| Agente Atendimento (Core) | R$ 25.000,00 | R$ 5.000,00 |
-| Agente Eventos | R$ 8.000,00 | R$ 1.500,00 |
-
-### Agentes Complementares
-
-| Agente | Setup | Mensal |
-|--------|-------|--------|
-| Agente Cobrança | R$ 8.000,00 | R$ 1.000,00 |
-| Agente Follow-Up e Recompra | R$ 8.000,00 | R$ 1.000,00 |
-| Agente Copiloto + POP | Sob consulta | Sob consulta |
-
-### Entregáveis Inclusos
-
-- Orquestrador de fila + roteamento inteligente.
-- Agentes configurados com base de conhecimento.
-- CRM + Dashboard executivo.
-- Integrações (Fortix, WhatsApp API, ERP).
-- Governança WhatsApp incluída.
+| Agente de Cobrança | R$ 8.000,00 | R$ 1.000,00 |
+| Agente de Eventos | R$ 8.000,00 | R$ 1.500,00 |
 
 **Notas**
-- Valores podem ser ajustados após diagnóstico e imersão com a equipe da Mercante.
-- Detalhes de integração (quais eventos/dados, periodicidade, limites) são definidos na fase 1 (Imersão).
+- Valores podem ser ajustados após diagnóstico e imersão.
+- Detalhes de integração são definidos na fase 1 (Imersão).
 
 ---
 
 ## 8) Perguntas Frequentes
 
-### Como integra com o Fortix e WhatsApp API?
-A integração é feita via API e webhooks, sem substituir o sistema atual. O orquestrador funciona como uma camada acima do Fortix, recebendo os leads e distribuindo inteligentemente entre os vendedores.
+### Como integra com o ERP?
+A integração é feita via API. O agente consulta produtos, preços e estoque, e cria ordens de venda diretamente no sistema.
 
 ### Como evitamos perda de número/limite no WhatsApp?
 Governança de WhatsApp com: controle de volume de envio, opt-out respeitado automaticamente, múltiplos canais de fallback (SMS, e-mail), e templates aprovados.
@@ -222,15 +234,15 @@ Governança de WhatsApp com: controle de volume de envio, opt-out respeitado aut
 ### Como fica LGPD e auditoria?
 Solução desenhada com boas práticas de privacidade: criptografia em trânsito e em repouso, controle de acesso por perfil, trilhas de auditoria completas e políticas de retenção configuráveis.
 
-### Quem aprova mensagens de cobrança?
-A régua de cobrança tem human-in-loop configurável. Mensagens padrão são automatizadas. Negociações de valor ou clientes sensíveis são escalados para aprovação.
+### Quem aprova pedidos e negociações?
+Human-in-loop configurável. O agente identifica casos que precisam de aprovação humana (pedidos acima de valor X, negociações de cobrança, etc.).
 
-### Preciso trocar o Fortix ou o sistema atual?
-Não! O orquestrador funciona como uma camada acima do sistema atual. O Fortix continua sendo usado pela equipe.
+### Preciso trocar o sistema atual?
+Não necessariamente. O Fortics pode ser substituído pela nova plataforma, gerando economia de R$2.000/mês.
 
 ### Qual o prazo de implementação?
-Em geral, 4 a 8 semanas dependendo da complexidade das integrações. Começamos com um piloto com 1-2 vendedores.
+Depende da complexidade das integrações. Começamos com um piloto para validação rápida.
 
 ---
 
-**Próximo passo:** Agendar imersão para diagnóstico detalhado e proposta personalizada.
+**Próximo passo:** Agendar imersão para diagnóstico detalhado e definição de integrações.

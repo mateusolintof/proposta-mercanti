@@ -6,6 +6,10 @@ import {
   Link2,
   LayoutDashboard,
   Check,
+  MessageSquareMore,
+  ShoppingCart,
+  Calendar,
+  Receipt,
 } from "lucide-react";
 import SlideShell from "@/components/ui/SlideShell";
 
@@ -14,159 +18,186 @@ type Plan = {
   subtitle: string;
   setup: string;
   monthly: string;
+  duration?: string;
   bullets: string[];
   badge?: string;
   featured?: boolean;
+  icon: React.ReactNode;
+  color: string;
 };
 
-// 2 agentes principais (linha de cima - cards maiores)
-const mainAgents: Plan[] = [
-  {
-    name: "Agente Atendimento",
-    subtitle: "Orquestrador inteligente com qualificação 24/7",
-    setup: "R$ 25.000,00",
-    monthly: "R$ 5.000,00",
-    bullets: [
-      "Distribuição inteligente entre vendedores",
-      "Qualificação automática de leads",
-      "Handoff com contexto completo",
-      "Atendimento fora do horário comercial",
-    ],
-    badge: "Core",
-    featured: true,
-  },
-  {
-    name: "Agente Eventos",
-    subtitle: "Confirmação de presença e dados para feiras e eventos",
-    setup: "R$ 8.000,00",
-    monthly: "R$ 1.500,00",
-    bullets: [
-      "Múltiplas tentativas de contato (mensagem + ligação)",
-      "Confirmação de presença no evento",
-      "Validação e atualização de dados cadastrais",
-      "Métricas de confirmação e ROI por evento",
-    ],
-  },
-];
+// Pacote principal (Omnichannel + Vendas)
+const mainPackage: Plan = {
+  name: "Solução Omnichannel + Agente de Vendas",
+  subtitle: "API Meta + Inbox + Automação de Vendas com ERP",
+  setup: "R$ 35.000,00",
+  monthly: "R$ 6.000,00",
+  duration: "12 meses",
+  bullets: [
+    "API Oficial Meta para WhatsApp",
+    "Inbox Unificado para vendedores",
+    "Agente de Vendas com RAG",
+    "Integração ERP (consulta + criação de pedidos)",
+    "Guardrails e Human-in-loop",
+    "Dashboard executivo incluso",
+  ],
+  badge: "Pacote Principal",
+  featured: true,
+  icon: <MessageSquareMore className="w-6 h-6" />,
+  color: "#00E5FF",
+};
 
-// 3 agentes complementares (linha de baixo)
-const additionalAgents: Plan[] = [
+// Pacotes complementares
+const additionalPackages: Plan[] = [
   {
-    name: "Agente Cobrança",
-    subtitle: "Régua de cobrança com governança WhatsApp",
+    name: "Agente de Cobrança",
+    subtitle: "Cobranças automatizadas com governança",
     setup: "R$ 8.000,00",
     monthly: "R$ 1.000,00",
     bullets: [
-      "Régua pré e pós-vencimento",
-      "Governança e limites WhatsApp",
+      "Régua de cobrança inteligente",
+      "Governança WhatsApp",
       "Múltiplos canais de contato",
       "Human-in-loop para negociações",
     ],
+    icon: <Receipt className="w-5 h-5" />,
+    color: "#FF6B6B",
   },
   {
-    name: "Agente Follow-Up e Recompra",
-    subtitle: "Reativação de clientes e cadência de recompra",
+    name: "Agente de Eventos",
+    subtitle: "Confirmação de presença e coleta de dados",
     setup: "R$ 8.000,00",
-    monthly: "R$ 1.000,00",
+    monthly: "R$ 1.500,00",
     bullets: [
-      "Identificação de clientes inativos",
-      "Cadência automatizada de recompra",
-      "Ofertas personalizadas por histórico",
-      "Métricas de reativação e LTV",
+      "Confirmação de presença automatizada",
+      "Múltiplas tentativas (mensagem + ligação)",
+      "Coleta e validação de dados",
+      "Métricas por evento",
     ],
-  },
-  {
-    name: "Agente Copiloto + POP",
-    subtitle: "Assistente de bolso para vendedores e sistema de disparo POP",
-    setup: "Sob consulta",
-    monthly: "Sob consulta",
-    bullets: [
-      "Assistente para dúvidas de produto",
-      "Consulta de estoque e preços",
-      "Disparo de promoções (POP)",
-      "Sugestões de venda cruzada",
-    ],
+    icon: <Calendar className="w-5 h-5" />,
+    color: "#FFD700",
   },
 ];
 
 const deliverables = [
   {
     icon: <Bot className="w-6 h-6" />,
-    title: "5 Agentes Especializados",
+    title: "4 Soluções Especializadas",
     items: [
-      "Atendimento, Evento, Cobrança",
-      "Follow-Up e Recompra",
-      "Copiloto + POP",
+      "Omnichannel (API Meta + Inbox)",
+      "Agente de Vendas (ERP + RAG)",
+      "Agente de Eventos",
+      "Agente de Cobrança",
     ],
   },
   {
     icon: <Link2 className="w-6 h-6" />,
     title: "Integrações",
     items: [
-      "Fortix (sistema atual)",
       "WhatsApp Business API",
-      "ERP e base de dados",
+      "ERP (consulta e pedidos)",
+      "Base de conhecimento (RAG)",
     ],
   },
   {
     icon: <LayoutDashboard className="w-6 h-6" />,
     title: "CRM & Dashboard",
     items: [
-      "Visão de funil e métricas",
-      "Distribuição por vendedor",
+      "Inbox unificado",
+      "Métricas por vendedor",
       "KPIs de eventos e cobrança",
     ],
   },
 ];
 
-function PlanCard({ plan, index }: { plan: Plan; index: number }) {
-  const isFeatured = plan.featured;
+function MainPackageCard({ plan }: { plan: Plan }) {
   return (
     <motion.div
-      className={`relative rounded-2xl border bg-white/5 p-5 flex flex-col gap-3 h-full ${
-        isFeatured
-          ? "border-[#00E5FF]/40 bg-[#00E5FF]/5"
-          : "border-white/10"
-      }`}
+      className="relative rounded-2xl border-2 border-[#00E5FF]/40 bg-[#00E5FF]/5 p-6"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.06 }}
     >
-      <div className="flex items-start justify-between gap-2">
-        <div className="space-y-1">
-          <h3 className="text-base font-semibold text-white">{plan.name}</h3>
-          <p className="text-white/60 text-xs leading-relaxed">
-            {plan.subtitle}
-          </p>
-        </div>
-        {plan.badge ? (
-          <span
-            className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold ${
-              isFeatured ? "bg-[#00E5FF] text-black" : "bg-white/10 text-white"
-            }`}
+      <div className="flex items-start justify-between gap-4 mb-4">
+        <div className="flex items-start gap-4">
+          <div
+            className="p-3 rounded-xl"
+            style={{ backgroundColor: `${plan.color}20` }}
           >
+            <div style={{ color: plan.color }}>{plan.icon}</div>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold text-white">{plan.name}</h3>
+            <p className="text-white/60 text-sm mt-1">{plan.subtitle}</p>
+          </div>
+        </div>
+        {plan.badge && (
+          <span className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold bg-[#00E5FF] text-black">
             {plan.badge}
           </span>
-        ) : null}
+        )}
+      </div>
+
+      <div className="grid grid-cols-3 gap-4 mb-6">
+        <div className="rounded-lg border border-white/10 bg-black/20 p-3 text-center">
+          <p className="text-[10px] uppercase tracking-wider text-white/40">Setup</p>
+          <span className="text-lg font-semibold text-white">{plan.setup}</span>
+        </div>
+        <div className="rounded-lg border border-[#00FF94]/30 bg-[#00FF94]/10 p-3 text-center">
+          <p className="text-[10px] uppercase tracking-wider text-white/40">Mensal</p>
+          <span className="text-lg font-semibold text-[#00FF94]">{plan.monthly}</span>
+        </div>
+        <div className="rounded-lg border border-white/10 bg-black/20 p-3 text-center">
+          <p className="text-[10px] uppercase tracking-wider text-white/40">Contrato</p>
+          <span className="text-lg font-semibold text-white">{plan.duration}</span>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        {plan.bullets.map((item) => (
+          <div
+            key={item}
+            className="flex items-start gap-2 text-white/70 text-sm"
+          >
+            <Check className="w-4 h-4 text-[#00FF94] mt-0.5 flex-shrink-0" />
+            <span>{item}</span>
+          </div>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+function AdditionalPackageCard({ plan, index }: { plan: Plan; index: number }) {
+  return (
+    <motion.div
+      className="rounded-2xl border border-white/10 bg-white/5 p-5 flex flex-col gap-3 h-full"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+    >
+      <div className="flex items-start gap-3">
+        <div
+          className="p-2.5 rounded-lg"
+          style={{ backgroundColor: `${plan.color}20` }}
+        >
+          <div style={{ color: plan.color }}>{plan.icon}</div>
+        </div>
+        <div>
+          <h3 className="text-base font-semibold text-white">{plan.name}</h3>
+          <p className="text-white/60 text-xs">{plan.subtitle}</p>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 gap-2">
         <div className="rounded-lg border border-white/10 bg-black/20 p-2.5">
-          <p className="text-[10px] uppercase tracking-wider text-white/40">
-            Setup
-          </p>
-          <span className="text-sm font-semibold text-white">
-            {plan.setup}
-          </span>
+          <p className="text-[10px] uppercase tracking-wider text-white/40">Setup</p>
+          <span className="text-sm font-semibold text-white">{plan.setup}</span>
         </div>
         <div className="rounded-lg border border-[#00FF94]/30 bg-[#00FF94]/10 p-2.5">
-          <p className="text-[10px] uppercase tracking-wider text-white/40">
-            Mensal
-          </p>
-          <span className="text-sm font-semibold text-[#00FF94]">
-            {plan.monthly}
-          </span>
+          <p className="text-[10px] uppercase tracking-wider text-white/40">Mensal</p>
+          <span className="text-sm font-semibold text-[#00FF94]">{plan.monthly}</span>
         </div>
       </div>
 
@@ -191,55 +222,46 @@ export default function InvestimentoSlide() {
       eyebrow="Investimento"
       eyebrowColor="success"
       title="Investimento"
-      subtitle="Escolha modular de agentes especializados"
+      subtitle="Pacotes modulares para sua operação"
       align="center"
       background={
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#00FF94]/5 via-transparent to-transparent pointer-events-none" />
       }
     >
       <div className="w-full space-y-6">
-        {/* 2 agentes principais (em cima) */}
+        {/* Pacote Principal */}
         <div className="space-y-3">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-3">
-              <div className="w-1.5 h-6 bg-[#00E5FF] rounded-full" />
-              <h3 className="text-lg font-semibold text-white">
-                Agentes Principais
-              </h3>
-            </div>
-            <p className="text-xs text-white/40 uppercase tracking-[0.2em]">
-              Escolha modular
-            </p>
+          <div className="flex items-center gap-3">
+            <div className="w-1.5 h-6 bg-[#00E5FF] rounded-full" />
+            <h3 className="text-lg font-semibold text-white">
+              Pacote Principal
+            </h3>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {mainAgents.map((plan, index) => (
-              <PlanCard key={plan.name} plan={plan} index={index} />
-            ))}
-          </div>
+          <MainPackageCard plan={mainPackage} />
         </div>
 
-        {/* 3 agentes complementares (em baixo) */}
+        {/* Pacotes Complementares */}
         <div className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-3">
               <div className="w-1.5 h-6 bg-[#00FF94] rounded-full" />
               <h3 className="text-lg font-semibold text-white">
-                Agentes Complementares
+                Pacotes Complementares
               </h3>
             </div>
             <p className="text-xs text-white/40 uppercase tracking-[0.2em]">
-              Expansão modular
+              Contratação modular
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {additionalAgents.map((plan, index) => (
-              <PlanCard key={plan.name} plan={plan} index={index + 2} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {additionalPackages.map((plan, index) => (
+              <AdditionalPackageCard key={plan.name} plan={plan} index={index} />
             ))}
           </div>
         </div>
 
+        {/* Entregáveis */}
         <div className="pt-2">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-1.5 h-6 bg-[#00E5FF] rounded-full" />

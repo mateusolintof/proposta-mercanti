@@ -2,7 +2,7 @@
 
 ## Visao Geral
 
-Apresentacao horizontal interativa para Proposta Comercial da Convert.AI, personalizada para **Mercante Distribuidora** — focada em orquestracao inteligente de atendimento comercial para televendas.
+Apresentacao horizontal interativa para Proposta Comercial da Convert.AI, personalizada para **Mercante Distribuidora** — focada em automacao de vendas e atendimento com integracoes ERP e API oficial da Meta.
 
 **Cliente:** Mercante Distribuidora
 **Documento de negocio:** `public/docs/CONTEUDO.md`
@@ -14,10 +14,10 @@ Apresentacao horizontal interativa para Proposta Comercial da Convert.AI, person
 |------|-------|
 | Time de televendas | 18 vendedores |
 | Volume mensal | 12-15 mil mensagens |
-| Sistema atual | Fortix (cliente escolhe vendedor em lista) |
-| Gargalo principal | Fila sem rotacao (lead preso se vendedor nao responde) |
-| Eventos | ~1000 leads por evento, follow-up leva ~30 dias |
-| Cobranca | ~1000 mensagens/dia, risco de perda de numero WhatsApp |
+| Sistema atual | Fortics (~R$2.000/mes) |
+| Custo operacao | R$83.000/mes (18 vendedores + Fortics) |
+| Eventos | Follow-up leva ~60 dias |
+| Cobranca | Risco de perda de numero WhatsApp |
 
 ## Stack Tecnica
 
@@ -55,19 +55,18 @@ npm start -p 3001       # Servir build final
 - Conversao de mouse wheel para scroll horizontal
 - Progress bar animada com Framer Motion
 
-### Slides (9 total)
+### Slides (8 total)
 
 ```
 src/components/slides/
-├── IntroSlide.tsx           # Hero "Atendimento Comercial com Controle de Fila e Mais Conversoes"
-├── DiagnosticoSlide.tsx     # 18 vendedores, gargalos de fila, controle operacional
-├── ObjetivoProjetoSlide.tsx # Objetivos Mercante e diferenciais
-├── SolucaoSlide.tsx         # 3 agentes IA orbitais (abre AgentModal)
+├── IntroSlide.tsx           # Hero principal
+├── DiagnosticoSlide.tsx     # Gargalos por area + custo operacional
+├── SolucaoSlide.tsx         # 4 solucoes orbitais (abre AgentModal)
 ├── FerramentasSlide.tsx     # CRM + Dashboard (abre modais de preview)
-├── GanhosSlide.tsx          # Controle de fila, distribuicao, eventos
-├── InvestimentoSlide.tsx    # 5 agentes com precos definidos
-├── FAQSlide.tsx             # 6 perguntas sobre Fortix, WhatsApp, LGPD
-└── CronogramaSlide.tsx      # 4 fases: Imersao, Piloto, Rollout, Otimizacao
+├── GanhosSlide.tsx          # Projecao financeira (50% em 6 meses)
+├── InvestimentoSlide.tsx    # 3 pacotes modulares
+├── FAQSlide.tsx             # Perguntas frequentes
+└── CronogramaSlide.tsx      # 4 fases de implementacao
 ```
 
 ### SlideShell Props
@@ -90,7 +89,7 @@ interface SlideShellProps {
 #### Tipos (`src/types/modal.ts`)
 
 ```typescript
-export type AgentType = "atendimento" | "evento" | "cobranca";
+export type AgentType = "omnichannel" | "vendas" | "evento" | "cobranca";
 
 export type ModalKind =
   | { type: "agent"; agent: AgentType }
@@ -107,13 +106,9 @@ export type ModalKind =
 
 | Modal | Arquivo | Aberto por | Descricao |
 |-------|---------|------------|-----------|
-| AgentModal | `AgentModal.tsx` | SolucaoSlide | Detalhes dos 3 agentes core |
+| AgentModal | `AgentModal.tsx` | SolucaoSlide | Detalhes das 4 solucoes |
 | CRMPreviewModal | `CRMPreviewModal.tsx` | FerramentasSlide | Preview interativo do CRM |
 | DashboardPreviewModal | `DashboardPreviewModal.tsx` | FerramentasSlide | Preview do Dashboard |
-| ROICalculatorModal | `ROICalculatorModal.tsx` | GanhosSlide | Simulador de impacto (taxa de resposta) |
-| CostReductionModal | `CostReductionModal.tsx` | GanhosSlide | Ganho de capacidade por vendedor |
-| GainsModal | `GainsModal.tsx` | GanhosSlide | KPIs operacionais Mercante |
-| IntelligenceModal | `IntelligenceModal.tsx` | GanhosSlide | Inteligencia de dados (canais, abandono) |
 
 #### Sub-componentes de Modais
 
@@ -121,8 +116,8 @@ export type ModalKind =
 src/components/modals/
 ├── ModalWrapper.tsx              # Base wrapper com overlay e animacoes
 ├── agents/
-│   ├── RadialCapabilityDiagram.tsx  # Infografico em etapas por agente (3 agentes)
-│   └── AgentFlowDiagram.tsx         # Fluxograma interativo (XYFlow, 3 agentes)
+│   ├── RadialCapabilityDiagram.tsx  # Infografico em etapas por agente (4 agentes)
+│   └── AgentFlowDiagram.tsx         # Fluxograma interativo (XYFlow, 4 agentes)
 ├── crm/
 │   ├── CRMDashboardView.tsx      # Visao geral do CRM
 │   ├── CRMContactsView.tsx       # Lista de contatos/leads
@@ -135,28 +130,29 @@ src/components/modals/
     └── DashInsightsView.tsx      # Insights e recomendacoes
 ```
 
-### Agentes IA
+### Solucoes/Agentes IA
 
-#### Agentes Principais (2 - com modal detalhado)
+#### 4 Solucoes (com modal detalhado)
 
-| ID | Nome | Funcao | Setup | Mensal |
-|----|------|--------|-------|--------|
-| atendimento | Agente Atendimento | Orquestrador com qualificacao 24/7 | R$ 25.000 | R$ 5.000 |
-| evento | Agente Eventos | Confirmacao de presenca para feiras/eventos | R$ 8.000 | R$ 1.500 |
+| ID | Nome | Funcao | Cor |
+|----|------|--------|-----|
+| omnichannel | Solucao Omnichannel | API Oficial Meta + Inbox Unificado | #00E5FF (Cyan) |
+| vendas | Agente de Vendas | Automacao de Vendas com ERP + RAG | #00FF94 (Verde) |
+| evento | Agente de Eventos | Confirmacao de presenca e coleta de dados | #FFD700 (Ouro) |
+| cobranca | Agente de Cobranca | Regua de cobranca com governanca WhatsApp | #FF6B6B (Vermelho) |
 
-#### Agentes Complementares (3 - no InvestimentoSlide)
+#### Precos
 
-| Nome | Funcao | Setup | Mensal |
-|------|--------|-------|--------|
-| Agente Cobranca | Regua de cobranca com governanca WhatsApp | R$ 8.000 | R$ 1.000 |
-| Agente Follow-Up e Recompra | Reativacao de clientes e cadencia de recompra | R$ 8.000 | R$ 1.000 |
-| Agente Copiloto + POP | Assistente de bolso + sistema de disparo POP | Sob consulta | Sob consulta |
+| Pacote | Setup | Mensal |
+|--------|-------|--------|
+| Omnichannel + Agente de Vendas | R$ 35.000,00 | R$ 6.000,00 |
+| Agente de Cobranca | R$ 8.000,00 | R$ 1.000,00 |
+| Agente de Eventos | R$ 8.000,00 | R$ 1.500,00 |
 
-Cada agente no AgentModal exibe:
-- Infografico em etapas (Entrada → Processamento → Acao)
+Cada solucao no AgentModal exibe:
+- Infografico em etapas (3 grupos)
 - Fluxograma interativo com XYFlow
-- Lista de beneficios
-- Metricas esperadas
+- Lista de beneficios (5 itens)
 
 ## Tema e Cores
 
@@ -167,7 +163,8 @@ Cada agente no AgentModal exibe:
 --accent-success: #00FF94  /* Verde sucesso */
 
 /* Cores dos agentes */
---atendimento: #00E5FF     /* Cyan */
+--omnichannel: #00E5FF     /* Cyan */
+--vendas: #00FF94          /* Verde */
 --eventos: #FFD700         /* Ouro */
 --cobranca: #FF6B6B        /* Vermelho */
 
@@ -244,34 +241,44 @@ const [activeView, setActiveView] = useState<ViewType>("dashboard");
 </button>
 ```
 
-## Calculadoras/Simuladores
+## Projecao Financeira (GanhosSlide)
 
-### ROICalculatorModal (Simulador de Impacto)
+### Premissas
+- 18 vendedores atuais
+- Custo/vendedor: R$4.500/mes (com 13o e ferias)
+- Custo Fortics atual: R$2.000/mes
+- Custo Solucao: R$6.000/mes (Omnichannel + Vendas)
+- **Meta: 50% da capacidade em 6 meses** (projecao agressiva)
 
-- **Taxa de resposta rapida (%):** % de leads que recebem resposta a tempo
-- **Multiplicador:** 1.35x (35% de melhoria)
-- **Taxa de conversao:** 8% (conservador)
-- **Teto:** 75%
+### Projecao 6 meses
+| Mes | % Capacidade | Vendedores Substituidos | Economia Mensal |
+|-----|--------------|------------------------|-----------------|
+| 1   | 12%          | 2                      | R$ 9.000        |
+| 2   | 20%          | 3.5                    | R$ 15.750       |
+| 3   | 30%          | 5                      | R$ 22.500       |
+| 4   | 38%          | 6.5                    | R$ 29.250       |
+| 5   | 44%          | 7.5                    | R$ 33.750       |
+| 6   | 50%          | 8+                     | R$ 36.000       |
 
-### CostReductionModal (Ganho de Capacidade)
-
-- **Multiplicador de capacidade:** 0.5x (25% de ganho)
-- Calcula horas liberadas e capacidade adicional por vendedor
+### Economia ao final do mes 6
+- Vendedores substituidos: 8 × R$4.500 = R$36.000/mes
+- Eliminacao Fortics: R$2.000/mes
+- Custo Solucao: -R$6.000/mes
+- **Economia liquida: R$32.000/mes**
+- **Payback: ~1.5 meses**
 
 ## Checklist do Projeto
 
-- [x] 9 slides criados e funcionando
+- [x] 8 slides criados e funcionando
 - [x] Background 3D integrado
 - [x] Navegacao horizontal com snap
-- [x] 7 modais interativos
-- [x] AgentModal com 3 agentes core
+- [x] 4 solucoes com modais detalhados
 - [x] Infografico em etapas e fluxograma por agente
 - [x] CRM Preview com 4 abas
 - [x] Dashboard Preview com 4 abas
-- [x] Simulador de impacto (taxa de resposta e capacidade)
-- [x] GainsModal e IntelligenceModal com metricas Mercante
-- [x] FAQSlide com perguntas sobre Fortix/WhatsApp/LGPD
-- [x] Investimento com 5 agentes e precos definidos
+- [x] Projecao financeira com tabela e ROI
+- [x] FAQSlide com perguntas frequentes
+- [x] Investimento com 3 pacotes modulares
 - [x] Animacoes Framer Motion
 - [x] Responsivo mobile/desktop
 - [x] Paleta de cores aplicada
@@ -280,10 +287,9 @@ const [activeView, setActiveView] = useState<ViewType>("dashboard");
 
 Ver `public/docs/CONTEUDO.md` para detalhes sobre:
 
-1. **Diagnostico:** 18 vendedores, gargalos de fila, controle operacional
-2. **Solucoes:** 5 agentes especializados (3 core + 2 complementares)
-3. **Ferramentas:** CRM + Dashboard executivo com integracao Fortix
-4. **Metricas:** Taxa de resposta, distribuicao equilibrada, recovery de eventos
-5. **Investimento:** Precos definidos por agente
-6. **Cronograma:** 4 fases (Imersao, Piloto, Rollout, Otimizacao)
-7. **Governanca WhatsApp:** controle de limites, qualidade, opt-out
+1. **Diagnostico:** Gargalos por area (Atendimento, Vendas, Eventos, Cobranca)
+2. **Solucoes:** 4 solucoes especializadas com modais detalhados
+3. **Ferramentas:** CRM + Dashboard executivo
+4. **Projecao:** 50% de capacidade em 6 meses, economia de R$32.000/mes
+5. **Investimento:** 3 pacotes modulares
+6. **Cronograma:** 4 fases de implementacao

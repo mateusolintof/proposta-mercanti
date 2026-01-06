@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AlertTriangle, Clock, TrendingDown, Users, Calendar, Receipt } from "lucide-react";
+import { AlertTriangle, Clock, Users, Calendar, Receipt, MessageSquareMore, ShoppingCart, DollarSign } from "lucide-react";
 import SlideShell from "@/components/ui/SlideShell";
 
 export default function DiagnosticoSlide() {
@@ -9,266 +9,304 @@ export default function DiagnosticoSlide() {
     <SlideShell
       eyebrow="Diagnóstico & Cenário"
       eyebrowColor="warning"
-      title="Onde a Receita Está Escapando"
-      subtitle="Diagnóstico da operação de televendas com 18 vendedores e 12-15 mil mensagens/mês."
+      title="Onde a Operação Pode Melhorar"
+      subtitle="Diagnóstico da operação de televendas com 18 vendedores."
       size="compact"
       background={
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-900/10 via-transparent to-transparent pointer-events-none" />
       }
     >
-      <div className="w-full space-y-10">
+      <div className="w-full space-y-8">
+        {/* Seção 01 - Gargalos por Área */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <span className="text-xs uppercase tracking-[0.3em] text-amber-300/70">
               01
             </span>
             <h3 className="text-lg font-semibold text-white">
-              Gargalos Identificados
+              Gargalos por Área
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-6">
-            <div className="space-y-4">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <p className="text-xs uppercase tracking-[0.2em] text-amber-300/80">
-                  Problema Principal
-                </p>
-                <p className="mt-2 text-body text-white/60">
-                  Sem fila inteligente, o lead fica preso se o vendedor escolhido não atende.
-                  Não há rotação automática nem SLA controlado.
-                </p>
-                <div className="mt-4 space-y-3">
-                  <div className="flex items-start gap-3">
-                    <div className="rounded-lg bg-white/5 p-2 text-amber-300">
-                      <Users className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <p className="text-body font-semibold text-white">
-                        18 vendedores, distribuição desigual
-                      </p>
-                      <p className="text-xs text-white/50">
-                        Alguns sobrecarregados, outros ociosos
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="rounded-lg bg-white/5 p-2 text-amber-300">
-                      <Clock className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <p className="text-body font-semibold text-white">
-                        Lead preso em vendedor ocupado
-                      </p>
-                      <p className="text-xs text-white/50">
-                        Sem rotação, o cliente espera ou desiste
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="rounded-lg bg-white/5 p-2 text-amber-300">
-                      <AlertTriangle className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <p className="text-body font-semibold text-white">
-                        SLA sem controle
-                      </p>
-                      <p className="text-xs text-white/50">
-                        Tempo de primeira resposta indefinido
-                      </p>
-                    </div>
-                  </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {/* Atendimento Multicanal */}
+            <motion.div
+              className="rounded-2xl border border-white/10 bg-white/5 p-5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              <div className="flex items-start gap-3 mb-3">
+                <div className="rounded-lg bg-[#00E5FF]/10 p-2 text-[#00E5FF]">
+                  <MessageSquareMore className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">Atendimento</p>
+                  <p className="text-xs text-white/50">Multicanal</p>
                 </div>
               </div>
+              <ul className="space-y-2 text-xs text-white/60">
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5">•</span>
+                  <span>Sem inbox unificado</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5">•</span>
+                  <span>Vendedores alternam entre sistemas</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5">•</span>
+                  <span>Histórico fragmentado</span>
+                </li>
+              </ul>
+            </motion.div>
 
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <p className="text-xs uppercase tracking-[0.2em] text-white/40">
-                  Sistema Atual (Fortix)
-                </p>
-                <p className="mt-2 text-body text-white/60">
-                  O cliente escolhe o vendedor em uma lista. Se esse vendedor não responder,
-                  o lead fica parado — sem fallback automático.
-                </p>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <p className="text-xs uppercase tracking-[0.2em] text-white/40">
-                  Onde a receita se perde
-                </p>
-                <div className="mt-4 space-y-3">
-                  <div className="flex items-start gap-3">
-                    <div className="rounded-lg bg-amber-500/10 p-2 text-amber-400">
-                      <TrendingDown className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <p className="text-body font-semibold text-white">
-                        Lead sem resposta em 5+ min
-                      </p>
-                      <p className="text-xs text-white/50">
-                        Esfria e busca concorrente
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="rounded-lg bg-amber-500/10 p-2 text-amber-400">
-                      <Calendar className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <p className="text-body font-semibold text-white">
-                        Eventos: follow-up leva ~30 dias
-                      </p>
-                      <p className="text-xs text-white/50">
-                        ~1000 leads por evento desperdiçados
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="rounded-lg bg-amber-500/10 p-2 text-amber-400">
-                      <Receipt className="h-4 w-4" />
-                    </div>
-                    <div>
-                      <p className="text-body font-semibold text-white">
-                        Cobrança: risco de perda de número
-                      </p>
-                      <p className="text-xs text-white/50">
-                        ~1000 mensagens/dia sem governança
-                      </p>
-                    </div>
-                  </div>
+            {/* Processo de Vendas */}
+            <motion.div
+              className="rounded-2xl border border-white/10 bg-white/5 p-5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <div className="flex items-start gap-3 mb-3">
+                <div className="rounded-lg bg-[#00FF94]/10 p-2 text-[#00FF94]">
+                  <ShoppingCart className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">Vendas</p>
+                  <p className="text-xs text-white/50">Processo manual</p>
                 </div>
               </div>
+              <ul className="space-y-2 text-xs text-white/60">
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5">•</span>
+                  <span>Sem acesso rápido a preços/estoque</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5">•</span>
+                  <span>Erros em pedidos manuais</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5">•</span>
+                  <span>Sem sugestões de cross-sell</span>
+                </li>
+              </ul>
+            </motion.div>
 
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <p className="text-xs uppercase tracking-[0.2em] text-white/40">
-                  Volume mensal
-                </p>
-                <div className="mt-3 flex flex-wrap gap-2 text-body text-white/70">
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-                    12-15k mensagens/mês
-                  </span>
-                  <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1">
-                    18 vendedores
-                  </span>
+            {/* Eventos */}
+            <motion.div
+              className="rounded-2xl border border-white/10 bg-white/5 p-5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <div className="flex items-start gap-3 mb-3">
+                <div className="rounded-lg bg-[#FFD700]/10 p-2 text-[#FFD700]">
+                  <Calendar className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">Eventos</p>
+                  <p className="text-xs text-white/50">Follow-up lento</p>
                 </div>
               </div>
-            </div>
+              <ul className="space-y-2 text-xs text-white/60">
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5">•</span>
+                  <span>Follow-up leva ~60 dias</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5">•</span>
+                  <span>Leads quentes esfriam</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5">•</span>
+                  <span>ROI difícil de medir</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* Cobrança */}
+            <motion.div
+              className="rounded-2xl border border-white/10 bg-white/5 p-5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              <div className="flex items-start gap-3 mb-3">
+                <div className="rounded-lg bg-[#FF6B6B]/10 p-2 text-[#FF6B6B]">
+                  <Receipt className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">Cobrança</p>
+                  <p className="text-xs text-white/50">Risco de número</p>
+                </div>
+              </div>
+              <ul className="space-y-2 text-xs text-white/60">
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5">•</span>
+                  <span>Processo manual</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5">•</span>
+                  <span>Risco de perda do número WhatsApp</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5">•</span>
+                  <span>Sem governança de limites</span>
+                </li>
+              </ul>
+            </motion.div>
           </div>
         </div>
 
+        {/* Seção 02 - Custo da Operação */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <span className="text-xs uppercase tracking-[0.3em] text-amber-300/70">
               02
             </span>
             <h3 className="text-lg font-semibold text-white">
-              O que está quebrando o processo (e fazendo receita escapar)
+              Custo da Operação Atual
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-6">
-            {/* Left: 3 Problem Cards */}
-            <div className="space-y-4">
-              <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
-                <p className="text-amber-300 text-body font-semibold mb-2">
-                  Lead trava por falta de fallback
-                </p>
-                <p className="text-white/60 text-body">
-                  Quando o cliente escolhe um vendedor e ele não responde,
-                  a conversa fica "congelada" — e a oportunidade esfria.
-                </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <motion.div
+              className="rounded-2xl border border-white/10 bg-white/5 p-5 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              <div className="w-12 h-12 mx-auto rounded-lg bg-amber-500/10 flex items-center justify-center mb-3">
+                <Users className="h-6 w-6 text-amber-400" />
               </div>
+              <p className="text-2xl font-bold text-white">18 vendedores</p>
+              <p className="text-xs text-white/50 mt-1">× R$4.500/mês (com 13º e férias)</p>
+              <p className="text-lg font-semibold text-amber-400 mt-2">R$ 81.000/mês</p>
+            </motion.div>
 
-              <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
-                <p className="text-amber-300 text-body font-semibold mb-2">
-                  Distribuição desigual = gargalo + ociosidade
-                </p>
-                <p className="text-white/60 text-body">
-                  Alguns vendedores ficam sobrecarregados enquanto outros ficam
-                  subutilizados. Resultado: perde-se venda onde era para ganhar velocidade.
-                </p>
+            <motion.div
+              className="rounded-2xl border border-white/10 bg-white/5 p-5 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <div className="w-12 h-12 mx-auto rounded-lg bg-amber-500/10 flex items-center justify-center mb-3">
+                <MessageSquareMore className="h-6 w-6 text-amber-400" />
               </div>
+              <p className="text-2xl font-bold text-white">Fortics</p>
+              <p className="text-xs text-white/50 mt-1">Custo atual da plataforma</p>
+              <p className="text-lg font-semibold text-amber-400 mt-2">~R$ 2.000/mês</p>
+            </motion.div>
 
-              <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5">
-                <p className="text-amber-300 text-body font-semibold mb-2">
-                  Sem regras, não existe previsibilidade
-                </p>
-                <p className="text-white/60 text-body">
-                  Sem prioridade, sem fila e sem cadência, a performance vira
-                  "sorte do atendimento" — não um processo controlável.
-                </p>
+            <motion.div
+              className="rounded-2xl border border-amber-500/30 bg-amber-500/10 p-5 text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <div className="w-12 h-12 mx-auto rounded-lg bg-amber-500/20 flex items-center justify-center mb-3">
+                <DollarSign className="h-6 w-6 text-amber-300" />
               </div>
-            </div>
+              <p className="text-2xl font-bold text-white">Total</p>
+              <p className="text-xs text-white/50 mt-1">Operação de televendas</p>
+              <p className="text-xl font-bold text-amber-300 mt-2">R$ 83.000/mês</p>
+            </motion.div>
+          </div>
+        </div>
 
-            {/* Right: O que muda + Custo */}
-            <div className="space-y-4">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-                <p className="text-xs uppercase tracking-[0.2em] text-white/40 mb-3">
-                  O que muda com o novo modelo
-                </p>
-                <ul className="space-y-2 text-body text-white/60">
-                  <li className="flex items-start gap-2">
-                    <span className="text-emerald-400 mt-1">•</span>
-                    <span><strong className="text-white/80">Nenhum lead fica parado:</strong> se não houver resposta, o sistema encaminha para o próximo disponível</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-emerald-400 mt-1">•</span>
-                    <span><strong className="text-white/80">Distribuição equilibrada:</strong> o volume deixa de concentrar em poucos vendedores</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-emerald-400 mt-1">•</span>
-                    <span><strong className="text-white/80">Follow-up automático:</strong> eventos e recompra deixam de depender de esforço manual</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-emerald-400 mt-1">•</span>
-                    <span><strong className="text-white/80">Gestão do funil:</strong> dá para enxergar onde travou, quem está sobrecarregado e o que está virando pedido</span>
-                  </li>
-                </ul>
-              </div>
+        {/* Seção 03 - O que as soluções resolvem */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-3">
+            <span className="text-xs uppercase tracking-[0.3em] text-amber-300/70">
+              03
+            </span>
+            <h3 className="text-lg font-semibold text-white">
+              O que as Soluções Resolvem
+            </h3>
+          </div>
 
-              <motion.div
-                className="bg-red-500/10 border border-red-500/20 rounded-2xl p-5"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-              >
-                <p className="text-red-400 text-xs uppercase tracking-wider font-semibold mb-2">
-                  CUSTO DE NÃO AGIR
-                </p>
-                <ul className="space-y-1.5 text-body text-white/70">
-                  <li className="flex items-start gap-2">
-                    <span className="text-red-400 mt-1">•</span>
-                    <span>Leads ficam presos e esfriam sem resposta</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-red-400 mt-1">•</span>
-                    <span>Follow-ups demoram semanas (eventos e recompra viram lista fria)</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-red-400 mt-1">•</span>
-                    <span>Cobrança em alto volume desgasta o canal e reduz capacidade de contato</span>
-                  </li>
-                </ul>
-              </motion.div>
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <motion.div
+              className="rounded-2xl border border-white/10 bg-white/5 p-5"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              <ul className="space-y-3 text-sm text-white/70">
+                <li className="flex items-start gap-3">
+                  <span className="text-[#00E5FF] mt-1">→</span>
+                  <span><strong className="text-white">Inbox unificado</strong> — fim da alternância entre sistemas</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#00FF94] mt-1">→</span>
+                  <span><strong className="text-white">Agente de Vendas</strong> — automação do processo, acesso a ERP</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#FFD700] mt-1">→</span>
+                  <span><strong className="text-white">Agente de Eventos</strong> — follow-up em dias, não meses</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#FF6B6B] mt-1">→</span>
+                  <span><strong className="text-white">Agente de Cobrança</strong> — automação com governança</span>
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              className="bg-red-500/10 border border-red-500/20 rounded-2xl p-5"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <p className="text-red-400 text-xs uppercase tracking-wider font-semibold mb-3">
+                CUSTO DE NÃO AGIR
+              </p>
+              <ul className="space-y-2 text-sm text-white/70">
+                <li className="flex items-start gap-2">
+                  <span className="text-red-400 mt-1">•</span>
+                  <span>Vendedores gastam tempo em tarefas repetitivas</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-400 mt-1">•</span>
+                  <span>Leads de eventos viram lista fria (~60 dias)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-400 mt-1">•</span>
+                  <span>Cobrança em alto volume desgasta o canal</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-red-400 mt-1">•</span>
+                  <span>Sem escalabilidade: crescer = contratar</span>
+                </li>
+              </ul>
+            </motion.div>
           </div>
         </div>
 
         <motion.div
-          className="bg-white/5 border border-white/10 rounded-2xl p-6 text-center"
+          className="bg-white/5 border border-white/10 rounded-2xl p-5 text-center"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          <p className="text-white/80 text-body leading-relaxed">
+          <p className="text-white/80 text-sm leading-relaxed">
             <strong className="text-[#00FF94]">Diagnóstico:</strong> o gargalo
-            é falta de orquestração e governança.{" "}
+            é falta de automação e ferramentas integradas.{" "}
             <strong className="text-[#00FF94]">
-              A fila inteligente + agentes especializados
+              As 4 soluções propostas
             </strong>{" "}
-            eliminam o problema de lead preso, garantem controle operacional e protegem a operação de cobrança.
+            eliminam tarefas repetitivas, aumentam capacidade e protegem a operação de cobrança.
           </p>
         </motion.div>
       </div>

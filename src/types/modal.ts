@@ -1,4 +1,4 @@
-export type AgentType = "atendimento" | "evento" | "cobranca";
+export type AgentType = "omnichannel" | "vendas" | "evento" | "cobranca";
 
 export type ModalKind =
   | { type: "agent"; agent: AgentType }
