@@ -28,8 +28,8 @@ export default function DiagnosticoSlide() {
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Atendimento Multicanal */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Atendimento e Vendas */}
             <motion.div
               className="rounded-2xl border border-white/10 bg-white/5 p-5"
               initial={{ opacity: 0, y: 20 }}
@@ -38,59 +38,30 @@ export default function DiagnosticoSlide() {
               transition={{ delay: 0.1 }}
             >
               <div className="flex items-start gap-3 mb-3">
-                <div className="rounded-lg bg-[#00E5FF]/10 p-2 text-[#00E5FF]">
-                  <MessageSquareMore className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-white">Atendimento</p>
-                  <p className="text-xs text-white/50">Multicanal</p>
-                </div>
-              </div>
-              <ul className="space-y-2 text-xs text-white/60">
-                <li className="flex items-start gap-2">
-                  <span className="text-amber-400 mt-0.5">•</span>
-                  <span>Sem inbox unificado</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-amber-400 mt-0.5">•</span>
-                  <span>Vendedores alternam entre sistemas</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-amber-400 mt-0.5">•</span>
-                  <span>Histórico fragmentado</span>
-                </li>
-              </ul>
-            </motion.div>
-
-            {/* Processo de Vendas */}
-            <motion.div
-              className="rounded-2xl border border-white/10 bg-white/5 p-5"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-            >
-              <div className="flex items-start gap-3 mb-3">
                 <div className="rounded-lg bg-[#00FF94]/10 p-2 text-[#00FF94]">
                   <ShoppingCart className="h-5 w-5" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">Vendas</p>
-                  <p className="text-xs text-white/50">Processo manual</p>
+                  <p className="text-sm font-semibold text-white">Atendimento e Vendas</p>
+                  <p className="text-xs text-white/50">Gargalos operacionais</p>
                 </div>
               </div>
               <ul className="space-y-2 text-xs text-white/60">
                 <li className="flex items-start gap-2">
                   <span className="text-amber-400 mt-0.5">•</span>
-                  <span>Sem acesso rápido a preços/estoque</span>
+                  <span>Atendimento restrito ao horário comercial</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-amber-400 mt-0.5">•</span>
-                  <span>Erros em pedidos manuais</span>
+                  <span>Sem gestão de filas e priorização</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-amber-400 mt-0.5">•</span>
-                  <span>Sem sugestões de cross-sell</span>
+                  <span>Tempo de resposta elevado</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-amber-400 mt-0.5">•</span>
+                  <span>Consultas manuais ao ERP</span>
                 </li>
               </ul>
             </motion.div>
@@ -101,7 +72,7 @@ export default function DiagnosticoSlide() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.2 }}
             >
               <div className="flex items-start gap-3 mb-3">
                 <div className="rounded-lg bg-[#FFD700]/10 p-2 text-[#FFD700]">
@@ -134,7 +105,7 @@ export default function DiagnosticoSlide() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.3 }}
             >
               <div className="flex items-start gap-3 mb-3">
                 <div className="rounded-lg bg-[#FF6B6B]/10 p-2 text-[#FF6B6B]">
