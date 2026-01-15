@@ -48,7 +48,7 @@ export default function IntroSlide({ onEnter }: IntroSlideProps) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
-          Sua Equipe Vendendo Mais, Você no Controle Total
+          Atendimento Comercial com Controle de Fila e Mais Conversões
         </motion.h1>
 
         {/* Subtitle */}
@@ -58,9 +58,9 @@ export default function IntroSlide({ onEnter }: IntroSlideProps) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7 }}
         >
-          Transformamos sua operação comercial em uma máquina de resultados previsíveis.
-          Seus 300 leads mensais atendidos automaticamente, vendedores focados em vender,
-          e você com visibilidade total de tudo que acontece.
+          Organizamos a fila do WhatsApp, distribuímos atendimentos com regras
+          claras e automatizamos follow-ups para transformar volume em pedidos
+          — sem deixar lead parado.
         </motion.p>
 
         {/* Tagline */}
@@ -70,7 +70,7 @@ export default function IntroSlide({ onEnter }: IntroSlideProps) {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9 }}
         >
-          Proposta exclusiva para SPK Distribuidora de Autopeças.
+          Solução desenhada para o contexto da Mercante Distribuidora.
         </motion.p>
 
         {/* CTA Button */}
@@ -84,7 +84,7 @@ export default function IntroSlide({ onEnter }: IntroSlideProps) {
           whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(0, 255, 148, 0.5)" }}
           whileTap={{ scale: 0.98 }}
         >
-          <span>Conhecer a Solução</span>
+          <span>Acessar Apresentação</span>
           <ArrowRight size={20} />
         </motion.button>
       </motion.div>

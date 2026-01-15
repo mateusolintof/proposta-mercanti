@@ -1,28 +1,25 @@
-export type PilarType = "atendimento" | "agente" | "automacoes" | "dashboard";
-
-// Alias para compatibilidade com componentes existentes
-export type AgentType = PilarType;
+export type AgentType = "omnichannel" | "vendas" | "evento" | "cobranca";
 
 export type ModalKind =
-  | { type: "pilar"; pilar: PilarType }
   | { type: "agent"; agent: AgentType }
   | { type: "crm" }
   | { type: "dashboard" }
+  | { type: "roi" }
+  | { type: "costs" }
+  | { type: "gains" }
+  | { type: "intelligence" }
   | null;
 
-export interface PilarData {
-  id: PilarType;
+export interface AgentData {
+  id: AgentType;
   name: string;
   fullName: string;
   description: string;
   benefits: string[];
-  metrics?: { label: string; value: string }[];
-  flowNodes?: FlowNodeData[];
-  flowEdges?: FlowEdgeData[];
+  metrics: { label: string; value: string }[];
+  flowNodes: FlowNodeData[];
+  flowEdges: FlowEdgeData[];
 }
-
-// Alias para compatibilidade
-export type AgentData = PilarData;
 
 export interface FlowNodeData {
   id: string;

@@ -6,20 +6,50 @@ import {
   ChevronDown,
   Shield,
   Clock,
-  Users,
+  MessageSquare,
   DollarSign,
-  Bot,
+  Code,
 } from "lucide-react";
 import SlideShell from "@/components/ui/SlideShell";
-import { faqItems } from "@/lib/data/proposal-data";
 
-const iconMap: Record<string, React.ReactNode> = {
-  DollarSign: <DollarSign className="w-5 h-5" />,
-  Clock: <Clock className="w-5 h-5" />,
-  Shield: <Shield className="w-5 h-5" />,
-  Users: <Users className="w-5 h-5" />,
-  Bot: <Bot className="w-5 h-5" />,
-};
+interface FAQItem {
+  icon: React.ReactNode;
+  question: string;
+  answer: string;
+}
+
+const faqItems: FAQItem[] = [
+  {
+    icon: <DollarSign className="w-5 h-5" />,
+    question: "O que está incluso no valor mensal de R$ 6.000?",
+    answer:
+      "O valor mensal inclui 100% dos custos operacionais: tokens de IA (Claude, OpenAI), banco de dados PostgreSQL e Redis, infraestrutura em nuvem, manutenção, atualizações de segurança, melhorias contínuas e suporte técnico dedicado. Também está incluso o custo da API Oficial da Meta para vendas e mensagens de relacionamento com o cliente.",
+  },
+  {
+    icon: <MessageSquare className="w-5 h-5" />,
+    question: "Como funciona o custo da API Oficial da Meta?",
+    answer:
+      "Para vendas e mensagens de relacionamento com o cliente, o custo da API da Meta já está embutido no valor mensal. Porém, para campanhas de marketing, promoções e disparos em massa, o custo da API é repassado separadamente conforme consumo (~R$ 0,30 a 0,50 por conversa).",
+  },
+  {
+    icon: <Code className="w-5 h-5" />,
+    question: "Qual a stack tecnológica utilizada?",
+    answer:
+      "A solução é construída com tecnologias modernas e escaláveis: Backend em Python com FastAPI, banco de dados PostgreSQL para persistência e Redis para cache e filas, RAG (Retrieval-Augmented Generation) para consulta inteligente ao ERP, Claude API (Anthropic) como LLM principal, e frontend em React/TypeScript. Toda infraestrutura roda em nuvem com alta disponibilidade.",
+  },
+  {
+    icon: <Shield className="w-5 h-5" />,
+    question: "Como garantem a segurança e controle das respostas da IA?",
+    answer:
+      "A solução possui múltiplas camadas de segurança: Guardrails que limitam o escopo de atuação do agente e bloqueiam respostas inadequadas; Human-in-the-loop para escalar automaticamente casos sensíveis ou fora do escopo para um atendente humano; Handoffs inteligentes que transferem a conversa mantendo todo o contexto; e logs completos para auditoria. O agente nunca toma decisões críticas sozinho.",
+  },
+  {
+    icon: <Clock className="w-5 h-5" />,
+    question: "Qual o prazo de implementação?",
+    answer:
+      "Em geral, 4 a 8 semanas dependendo da complexidade das integrações com o ERP. O projeto segue 4 fases: Imersão (diagnóstico e mapeamento), Desenvolvimento (construção dos agentes e integrações), Testes e Validação (ambiente controlado), e Go-Live (lançamento com acompanhamento). Trabalhamos de forma iterativa para entregas rápidas.",
+  },
+];
 
 export default function FAQSlide() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -33,7 +63,7 @@ export default function FAQSlide() {
       eyebrow="FAQ"
       eyebrowColor="default"
       title="Perguntas Frequentes"
-      subtitle="Tire suas dúvidas sobre custos, prazo, segurança e funcionamento."
+      subtitle="Custos, API da Meta, stack tecnológica e implementação."
       align="center"
       size="compact"
     >
@@ -59,7 +89,7 @@ export default function FAQSlide() {
                     : "bg-[#00E5FF]/20 text-[#00E5FF]"
                 }`}
               >
-                {iconMap[item.iconName]}
+                {item.icon}
               </div>
               <span
                 className={`flex-1 font-medium transition-colors text-body ${

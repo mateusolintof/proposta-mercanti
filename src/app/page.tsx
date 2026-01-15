@@ -11,19 +11,24 @@ import type { ModalKind } from "@/types/modal";
 const Scene = dynamic(() => import("@/components/3d/Scene"), { ssr: false });
 
 // Modals (dynamic import for performance)
-const PilarModal = dynamic(() => import("@/components/modals/PilarModal"), { ssr: false });
+const AgentModal = dynamic(() => import("@/components/modals/AgentModal"), { ssr: false });
 const CRMPreviewModal = dynamic(() => import("@/components/modals/CRMPreviewModal"), { ssr: false });
 const DashboardPreviewModal = dynamic(() => import("@/components/modals/DashboardPreviewModal"), { ssr: false });
+const ROICalculatorModal = dynamic(() => import("@/components/modals/ROICalculatorModal"), { ssr: false });
+const CostReductionModal = dynamic(() => import("@/components/modals/CostReductionModal"), { ssr: false });
+const GainsModal = dynamic(() => import("@/components/modals/GainsModal"), { ssr: false });
+const IntelligenceModal = dynamic(() => import("@/components/modals/IntelligenceModal"), { ssr: false });
 
 // Slides
 import IntroSlide from "@/components/slides/IntroSlide";
 import DiagnosticoSlide from "@/components/slides/DiagnosticoSlide";
 import SolucaoSlide from "@/components/slides/SolucaoSlide";
+import ComparativoSlide from "@/components/slides/ComparativoSlide";
+import FerramentasSlide from "@/components/slides/FerramentasSlide";
 import GanhosSlide from "@/components/slides/GanhosSlide";
 import InvestimentoSlide from "@/components/slides/InvestimentoSlide";
 import CronogramaSlide from "@/components/slides/CronogramaSlide";
 import FAQSlide from "@/components/slides/FAQSlide";
-import ProximosPassosSlide from "@/components/slides/ProximosPassosSlide";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -56,11 +61,17 @@ export default function Home() {
   const slides = useMemo(
     () => [
       { id: "intro", label: "Início", element: <IntroSlide onEnter={() => scrollToIndex(1)} /> },
-      { id: "diagnostico", label: "O Problema", element: <DiagnosticoSlide /> },
+      { id: "diagnostico", label: "Diagnóstico", element: <DiagnosticoSlide /> },
       {
         id: "solucao",
-        label: "A Solução",
+        label: "Solução",
         element: <SolucaoSlide onOpenModal={handleOpenModal} />,
+      },
+      { id: "comparativo", label: "Comparativo", element: <ComparativoSlide /> },
+      {
+        id: "ferramentas",
+        label: "Ferramentas",
+        element: <FerramentasSlide onOpenModal={handleOpenModal} />,
       },
       {
         id: "ganhos",
@@ -68,9 +79,8 @@ export default function Home() {
         element: <GanhosSlide onOpenModal={handleOpenModal} />,
       },
       { id: "investimento", label: "Investimento", element: <InvestimentoSlide /> },
-      { id: "cronograma", label: "Cronograma", element: <CronogramaSlide /> },
       { id: "faq", label: "FAQ", element: <FAQSlide /> },
-      { id: "proximos", label: "Próximos Passos", element: <ProximosPassosSlide /> },
+      { id: "cronograma", label: "Cronograma", element: <CronogramaSlide /> },
     ],
     [handleOpenModal, scrollToIndex]
   );
@@ -256,16 +266,9 @@ export default function Home() {
       </div>
 
       {/* Modals */}
-      {modal?.type === "pilar" && (
-        <PilarModal
-          pilar={modal.pilar}
-          isOpen={true}
-          onClose={handleCloseModal}
-        />
-      )}
       {modal?.type === "agent" && (
-        <PilarModal
-          pilar={modal.agent}
+        <AgentModal
+          agent={modal.agent}
           isOpen={true}
           onClose={handleCloseModal}
         />
@@ -275,6 +278,18 @@ export default function Home() {
       )}
       {modal?.type === "dashboard" && (
         <DashboardPreviewModal isOpen={true} onClose={handleCloseModal} />
+      )}
+      {modal?.type === "roi" && (
+        <ROICalculatorModal isOpen={true} onClose={handleCloseModal} />
+      )}
+      {modal?.type === "costs" && (
+        <CostReductionModal isOpen={true} onClose={handleCloseModal} />
+      )}
+      {modal?.type === "gains" && (
+        <GainsModal isOpen={true} onClose={handleCloseModal} />
+      )}
+      {modal?.type === "intelligence" && (
+        <IntelligenceModal isOpen={true} onClose={handleCloseModal} />
       )}
     </main>
   );
